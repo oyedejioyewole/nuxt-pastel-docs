@@ -1,0 +1,5 @@
+{
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./app/assets/css/main.css",
+  "tailwindAttributes": ["left-slot-classes", "right-slot-classes"]
+}

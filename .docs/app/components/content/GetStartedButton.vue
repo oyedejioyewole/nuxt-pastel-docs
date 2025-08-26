@@ -1,0 +1,39 @@
+<script lang="ts" setup>
+import type { PhosphorIconName } from "#phosphor-icons/types";
+
+const { extra, variant = "primary" } = defineProps<{
+  extra?: boolean;
+  icon?: PhosphorIconName;
+  variant?: "accent" | "primary";
+}>();
+
+const trollReader = () => {
+  if (extra) {
+    window.alert("You thought you were smart?");
+  }
+
+  navigateTo(
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1",
+    { external: true },
+  );
+};
+</script>
+
+<template>
+  <div class="flex flex-col items-center gap-y-2">
+    <UiButton
+      :icon="$props.icon"
+      :variant="$props.variant"
+      @click="trollReader"
+    >
+      <slot />
+    </UiButton>
+
+    <div
+      class="font-cursive inline-flex items-center gap-x-2 text-sm font-bold"
+    >
+      <UiIcon name="arrow-bend-left-up" size="20" />
+      '{{ $props.variant }}' variant
+    </div>
+  </div>
+</template>
