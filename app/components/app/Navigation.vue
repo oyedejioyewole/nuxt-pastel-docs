@@ -59,11 +59,11 @@ const { data: latestRelease } = await useFetch<{
               sun: $colorMode.value === 'dark',
             }"
             weight="duotone"
-            size="20"
+            :size="20"
           />
 
           <template #fallback>
-            <UiIcon name="circle-half" size="20" weight="duotone" />
+            <UiIcon name="circle-half" :size="20" weight="duotone" />
           </template>
         </ClientOnly>
       </div>

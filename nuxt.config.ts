@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@vueuse/nuxt",
     "nuxt-og-image",
-    process.env.ICON_MODULE ?? "nuxt-phosphor-icons",
+    import.meta.env.ICON_MODULE ?? "nuxt-phosphor-icons",
   ],
   devtools: { enabled: true },
   app: {

@@ -36,12 +36,12 @@ const remappedIcon = computed(() => {
 
   switch (typeof props.icon) {
     case "object": {
-      return Object.fromEntries(
-        Object.entries(props.icon).map(([name, condition]) => [
-          pastelDocsTheme.icons[name],
-          condition,
-        ]),
-      ) as ButtonProps["icon"];
+      const entries = Object.entries(props.icon).map(([name, condition]) => [
+        pastelDocsTheme.icons[name] ?? name,
+        condition,
+      ]);
+
+      return Object.fromEntries(entries) as ButtonProps["icon"];
     }
     default:
       return pastelDocsTheme.icons[props.icon] as ButtonProps["icon"];
@@ -61,7 +61,7 @@ const remappedIcon = computed(() => {
         v-if="icon"
         :name="remappedIcon ?? icon"
         weight="duotone"
-        size="16"
+        :size="16"
       />
     </slot>
 
