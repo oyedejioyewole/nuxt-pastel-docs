@@ -31,7 +31,7 @@ const themePalette = computed(() => {
       :style="themePalette"
     >
       <div
-        class="bg-primary-100/70 dark:bg-primary-900/70 top-0 z-10 backdrop-blur-lg transition duration-300 max-lg:sticky max-lg:border-b"
+        class="bg-primary-100/70 dark:bg-primary-900/70 inset-0 z-10 backdrop-blur-lg max-lg:sticky max-lg:border-b"
       >
         <AppNavigation
           class="min-lg:py-8 w-9/10 mx-auto flex items-center justify-between py-4"

@@ -1,5 +1,3 @@
-import type { PhosphorIconName } from "#phosphor-icons/types";
-
 export default defineAppConfig({
   pastelDocsTheme: {
     headline: "Create beautiful pastel themed docs with Nuxt.",
@@ -10,6 +8,6 @@ export default defineAppConfig({
       ogImage: "NuxtSeo",
     },
 
-    icons: {} as Record<PhosphorIconName, string>,
+    icons: {} as Record<string, string>,
   },
 });

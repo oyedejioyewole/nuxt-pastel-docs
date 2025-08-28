@@ -15,7 +15,7 @@
 
     <UiButton
       variant="accent"
-      :icon="copied ? 'check' : 'clipboard'"
+      :icon="{ check: copied, clipboard: !copied }"
       @click="copy($props.code ?? '')"
       >{{ copied ? "Copied" : "Copy" }}
     </UiButton>

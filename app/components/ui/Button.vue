@@ -2,12 +2,16 @@
 import type { PhosphorIconName } from "#phosphor-icons/types";
 import { twMerge } from "tailwind-merge";
 
-const { icon, variant = "primary" } = defineProps<{
+interface ButtonProps {
   class?: string;
-  icon?: PhosphorIconName;
+  icon?: PhosphorIconName | Partial<Record<PhosphorIconName, boolean>>;
   to?: string;
   variant?: "primary" | "accent";
-}>();
+}
+
+const props = withDefaults(defineProps<ButtonProps>(), {
+  variant: "primary",
+});
 
 const NuxtLink = resolveComponent("NuxtLink");
 
@@ -15,7 +19,7 @@ const classes = computed(() => {
   const baseClasses =
     "inline-flex w-fit select-none items-center gap-x-2 rounded-lg px-4 py-2 text-sm font-bold selection:bg-transparent";
 
-  switch (variant) {
+  switch (props.variant) {
     case "accent":
       return `${baseClasses} bg-primary-200 dark:bg-primary-800 border border-dashed hover:border-solid`;
     case "primary":
@@ -28,9 +32,20 @@ const classes = computed(() => {
 const { pastelDocsTheme } = useAppConfig();
 
 const remappedIcon = computed(() => {
-  if (!icon) return null;
+  if (!props.icon || !Object.keys(pastelDocsTheme.icons).length) return null;
 
-  return pastelDocsTheme.icons[icon] as PhosphorIconName;
+  switch (typeof props.icon) {
+    case "object": {
+      return Object.fromEntries(
+        Object.entries(props.icon).map(([name, condition]) => [
+          pastelDocsTheme.icons[name],
+          condition,
+        ]),
+      ) as ButtonProps["icon"];
+    }
+    default:
+      return pastelDocsTheme.icons[props.icon] as ButtonProps["icon"];
+  }
 });
 </script>
 

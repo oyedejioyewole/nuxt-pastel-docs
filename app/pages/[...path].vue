@@ -49,7 +49,10 @@ useSeoMeta({
 
       <template v-if="tableOfContents" #aside>
         <UiButton
-          :icon="tableOfContentsToggled ? 'sort-descending' : 'sort-ascending'"
+          :icon="{
+            'sort-descending': tableOfContentsToggled,
+            'sort-ascending': !tableOfContentsToggled,
+          }"
           variant="accent"
           @click="tableOfContentsToggled = !tableOfContentsToggled"
           >On this page</UiButton
