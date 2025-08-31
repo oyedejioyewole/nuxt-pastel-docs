@@ -7,7 +7,7 @@ defineProps<{
   rightSlotClasses?: string;
 }>();
 
-const { pastelDocsTheme } = useAppConfig();
+const { pastelDocs } = useAppConfig();
 </script>
 
 <template>
@@ -24,13 +24,13 @@ const { pastelDocsTheme } = useAppConfig();
       <slot>
         <!-- Tagline -->
         <ProseH1>
-          {{ pastelDocsTheme.headline }}
+          {{ pastelDocs.headline }}
         </ProseH1>
 
         <!-- Feature list -->
         <ul class="space-y-2">
           <li
-            v-for="(feature, _index) of pastelDocsTheme.features"
+            v-for="(feature, _index) of pastelDocs.features"
             :key="_index"
             class="flex gap-x-2"
           >
@@ -45,7 +45,7 @@ const { pastelDocsTheme } = useAppConfig();
           <UiButton
             icon="github-logo"
             variant="accent"
-            :to="`https://github.com/${pastelDocsTheme.repo}`"
+            :to="`https://github.com/${pastelDocs.repo}`"
           >
             View project
           </UiButton>

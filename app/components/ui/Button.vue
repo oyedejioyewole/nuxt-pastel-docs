@@ -29,22 +29,22 @@ const classes = computed(() => {
   }
 });
 
-const { pastelDocsTheme } = useAppConfig();
+const { pastelDocs } = useAppConfig();
 
 const remappedIcon = computed(() => {
-  if (!props.icon || !Object.keys(pastelDocsTheme.icons).length) return null;
+  if (!props.icon || !Object.keys(pastelDocs.icons).length) return null;
 
   switch (typeof props.icon) {
     case "object": {
       const entries = Object.entries(props.icon).map(([name, condition]) => [
-        pastelDocsTheme.icons[name] ?? name,
+        pastelDocs.icons[name] ?? name,
         condition,
       ]);
 
       return Object.fromEntries(entries) as ButtonProps["icon"];
     }
     default:
-      return pastelDocsTheme.icons[props.icon] as ButtonProps["icon"];
+      return pastelDocs.icons[props.icon] as ButtonProps["icon"];
   }
 });
 </script>

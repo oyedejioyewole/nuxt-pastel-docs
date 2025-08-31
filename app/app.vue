@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-const { pastelDocsTheme } = useAppConfig();
+const { pastelDocs } = useAppConfig();
 
-defineOgImageComponent(pastelDocsTheme.components.ogImage, {
-  theme: pastelDocsTheme.themeColor,
+defineOgImageComponent(pastelDocs.components.ogImage, {
+  theme: pastelDocs.themeColor,
 });
 </script>
 
 <template>
   <NuxtRouteAnnouncer />
   <NuxtLayout>
-    <NuxtLoadingIndicator :color="pastelDocsTheme.themeColor" />
+    <NuxtLoadingIndicator :color="pastelDocs.themeColor" />
     <NuxtPage />
   </NuxtLayout>
 </template>

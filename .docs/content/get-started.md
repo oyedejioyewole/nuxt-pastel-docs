@@ -29,7 +29,7 @@ But the general gist is:
 
   ```ts [nuxt.config]
   export default defineNuxtConfig({
-    extends: ['github:oyedejioyewole/nuxt-pastel-docs']
+    extends: [['github:oyedejioyewole/nuxt-pastel-docs', { install: true }]]
   })
   ```
   This should add this project as a base layer which you can then build on top.
@@ -56,7 +56,7 @@ But the general gist is:
   
   This tells [@nuxt/content](https://content.nuxt.com) to look for `.md` files and also expect a custom schema object: `{ displayToc: boolean }`
   
-  This custom schema toggles whether to display a big *** header containing the title and description of the page, and a table of contents on all pages (apart from the `'/'` route).
+  This custom schema toggles whether to display a header containing the title, description and a table of contents on all pages with this property (apart from the `'/'` route).
   
   Perfect, now you can enjoy writing your documentation with my **_highly opinionated_**{.font-cursive} takes on UI design :sparkles:
 
@@ -67,33 +67,34 @@ Now let's head into customizing this theme to truly make it yours.
 
 ### Create an `app.config.ts`
 
-If you want to tweak app-level configurations, provide a `pastelDocsTheme` object.
+If you want to tweak app-level configurations, provide a `pastelDocs` object.
 
 **Note:** I suggest you tweak them else you'd end up with the values used to build this site.
 
-The `pastelDocsTheme` follows this schema:
+The `pastelDocs` follows this schema:
 
 ```ts
 interface AppConfig {
-  pastelDocsTheme: {
-    headline: string,
-    repo: string,
-    themeColor: string,
-    features: string[],
+  pastelDocs: {
     components: {
       seo: string
-    }
+    },
+    features: string[],
+    headline: string,
+    icons: Record<string, string>,
+    repo: string,
+    themeColor: string,
   }
 }
 ```
 
 See, I did not pollute your entire `app.config` with properties, so there won't be conflicts with your options.
 
-Pretty considerate? Yes I know.
+Pretty considerate, yeah? Yes, I know.
 
 ### Overriding components
 
-If you're really salty about my design choices &mdash; particularly my brain's love for simplicity, you can decide to roll out your own version of components to truly bring your stroke-inducing design choices to life.
+If you're really salty about my design choices, you can decide to roll out your own version of components to truly bring your stroke-inducing design choices to life.
 
 The structure of the `components` directory is given below:
 
@@ -102,29 +103,28 @@ The structure of the `components` directory is given below:
 
 This folder contains components that define sections in the theme.
 
-  ::UiTabs{:tabs='["Header.vue", "Navigation.vue"]'}
+  ::UiTabs{:tabs='["Header.vue", "Logo.vue", "Navigation.vue"]'}
   
   #tab-1
   
-  This component creates a big *ss header section for you to gaze in awe at never since before simplicity.
-  
-  Just as everything in life, this component has properties you can pass, namely:
+  **Note:** I'm still working on this part of the documentation.
   
   #tab-2
+  ...
+  
+  #tab-3
   ...
   ::
 
 #tab-2
 
-This folder contains components from [@nuxtjs/mdc](https://github.com/nuxt-modules/mdc/tree/main/src/runtime/components/prose), I felt needed the touch of my design fingers.
+This folder contains components from [@nuxtjs/mdc](https://github.com/nuxt-modules/mdc/tree/main/src/runtime/components/prose) I felt needed the touch of my design fingers.
 
 #tab-3
 
 This folder contains only the [NuxtSeo](https://nuxtseo.com/docs/og-image/guides/community-templates) community template from [nuxt-og-image](https://nuxtseo.com/docs/og-image/getting-started/introduction) as I enabled the [zeroRuntime](https://nuxtseo.com/docs/og-image/guides/zero-runtime) configuration.
 
-**Why, you may ask?** 
-
-It's just for the love of the game.
+**Why?** &mdash; It's just for the love of the game.
 
 **What does this mean?**
 
@@ -136,9 +136,9 @@ A snippet is provided below:
 
 ```ts [app.config.ts]
 export default defineAppConfig({
-  pastelDocsTheme: {
+  pastelDocs: {
     components: {
-      seo: 'MySexyComponent'
+      seo: 'MySexyOgComponent'
     }
   }
 })
@@ -164,10 +164,8 @@ This section should be self-explanatory
   You know you want to
   ::
   
-Just as everything in life, this component has properties you can pass, namely:
-
 1. `class` &mdash; custom CSS classes that'll get merged with the base CSS classes, courtesy of [tailwind-merge](https://www.npmjs.com/package/tailwind-merge)
-2. `icon` &mdash; choose an icon to render from the [phosphor-icons](https://phosphoricons.com) library. Courtesy of [nuxt-phosphor-icons](https://nuxt-phosphor-icons.vercel.app)
+2. `icon` &mdash; choose an icon to render from the [phosphor-icons](https://phosphoricons.com) library. Courtesy of [nuxt-phosphor-icons](https://nuxt-phosphor-icons.vercel.app/get-started#usage)
 3. `to` &mdash; determines whether the button should be a link (which resolves to [NuxtLink](https://nuxt.com/docs/4.x/api/components/nuxt-link)) or not.
 4. `variant` &mdash; need I talk?
 
@@ -178,13 +176,11 @@ This component also has slots you can utilize, namely:
 #tab-2
 Due to the use of [nuxt-phosphor-icons](https://nxut-phosphor-icons.vercel.app) (cause I'm genuinely lazy), we have icon support, yay :confetti_ball:.
 
-**Note:** In the wild, you use the component as `UiIcon` &mdash; I changed the prefix just cause I can :upside_down_face:.
-
-For more information on how to use this component, I won't provide you with the details, you have to figure that out yourself, [here](https://nuxt-phosphor-icons.vercel.app/guide)
+**Note:** You can use the component as `UiIcon` :upside_down_face:
 
 #tab-3
 
-This section should be self-explanatory, as that's what you used to reach this point &mdash; duhhhh :roll_eyes:
+This section should be self-explanatory, as that's what you used to reach this point &mdash; duhhhh. :roll_eyes:
 
 #### Examples
 
@@ -193,14 +189,12 @@ This section should be self-explanatory, as that's what you used to reach this p
   There's nothing to see, scooch along now
   
   #tab-2
-  You saw the first tab and really thought there'd be something here instead? Insanity mehn 🥴
+  You saw the first tab and really thought there'd be something here instead? 🥴
   ::
-  
-Just as everything in life, this component has properties you can pass, namely:
 
 `tabs` &mdash; an array of strings which build up a tab.
 
-An example for the practical readers:
+These stuff below are meant to be examples, I guess:
 
 ```vue [YourSexyComponent]
 <UiTabs :tabs="['1', '2', '3']">
@@ -216,7 +210,7 @@ An example for the practical readers:
 </UiTabs>
 ```
 
-or for the `markdown` freaks
+or
 
 ```md [content]
 ::UiTabs{:tabs="['1', '2','3']"}

@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import { tailwindcssPaletteGenerator } from "@bobthered/tailwindcss-palette-generator";
 
-const { pastelDocsTheme } = useAppConfig();
+const { pastelDocs } = useAppConfig();
 
 useSeoMeta({
-  titleTemplate: `%s · ${pastelDocsTheme.repo.split("/").at(1)}`,
+  titleTemplate: `%s · ${pastelDocs.repo.split("/").at(1)}`,
 });
 
 const themePalette = computed(() => {
-  const theme = tailwindcssPaletteGenerator(pastelDocsTheme.themeColor) as {
+  const theme = tailwindcssPaletteGenerator(pastelDocs.themeColor) as {
     primary: Record<number, string>;
   };
 
