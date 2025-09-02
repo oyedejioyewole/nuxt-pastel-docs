@@ -4,7 +4,7 @@ export default defineAppConfig({
       ogImage: "NuxtSeo",
     },
     headline: "This is the headline",
-    icons: {} as Record<string, string>,
+    icons: {} as Partial<Record<string, string>>,
     repo: "your-username/your-repo",
     themeColor: "#D64045",
   },

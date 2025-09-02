@@ -45,17 +45,23 @@ const { data: latestRelease } = await useFetch<{
     >
       <ColorScheme>
         <UiIcon
-          :name="{
-            desktop: $colorMode.preference === 'system',
-            'moon-stars': $colorMode.preference === 'light',
-            sun: $colorMode.preference === 'dark',
-          }"
+          :name="
+            useRemapIcon({
+              desktop: $colorMode.preference === 'system',
+              'moon-stars': $colorMode.preference === 'light',
+              sun: $colorMode.preference === 'dark',
+            })
+          "
           :size="20"
           weight="duotone"
         />
 
         <template #placeholder>
-          <UiIcon name="circle-half" weight="duotone" :size="20" />
+          <UiIcon
+            :name="useRemapIcon('circle-half')"
+            weight="duotone"
+            :size="20"
+          />
         </template>
       </ColorScheme>
 

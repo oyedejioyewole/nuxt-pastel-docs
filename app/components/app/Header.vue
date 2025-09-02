@@ -34,7 +34,7 @@ const { pastelDocs } = useAppConfig();
             :key="_index"
             class="flex gap-x-2"
           >
-            <UiIcon name="check" />
+            <UiIcon :name="useRemapIcon('check')" />
             {{ feature }}
           </li>
         </ul>

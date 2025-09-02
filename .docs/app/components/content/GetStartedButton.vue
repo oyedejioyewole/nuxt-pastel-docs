@@ -32,7 +32,7 @@ const trollReader = () => {
     <div
       class="font-cursive inline-flex items-center gap-x-2 text-sm font-bold"
     >
-      <UiIcon name="arrow-bend-left-up" size="20" />
+      <UiIcon :name="useRemapIcon('arrow-bend-left-up')" size="20" />
       '{{ $props.variant }}' variant
     </div>
   </div>

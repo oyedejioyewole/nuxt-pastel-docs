@@ -29,23 +29,9 @@ const classes = computed(() => {
   }
 });
 
-const { pastelDocs } = useAppConfig();
-
 const remappedIcon = computed(() => {
-  if (!props.icon || !Object.keys(pastelDocs.icons).length) return null;
-
-  switch (typeof props.icon) {
-    case "object": {
-      const entries = Object.entries(props.icon).map(([name, condition]) => [
-        pastelDocs.icons[name] ?? name,
-        condition,
-      ]);
-
-      return Object.fromEntries(entries) as ButtonProps["icon"];
-    }
-    default:
-      return pastelDocs.icons[props.icon] as ButtonProps["icon"];
-  }
+  if (!props.icon) return null;
+  return useRemapIcon(props.icon);
 });
 </script>
 

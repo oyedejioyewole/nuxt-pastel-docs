@@ -5,7 +5,10 @@
       class="group relative inline-flex items-end decoration-dotted underline-offset-8 hover:underline"
       :href="`#${props.id}`"
     >
-      <UiIcon name="link" class="absolute -left-10 hidden group-hover:block" />
+      <UiIcon
+        :name="useRemapIcon('link')"
+        class="absolute -left-10 hidden group-hover:block"
+      />
 
       <slot />
     </a>
