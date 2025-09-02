@@ -1,8 +1,7 @@
 {
-  "name": "nuxt-pastel-docs-theme",
+  "name": "nuxt-pastel-docs",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
-  "main": "./nuxt.config.ts",
   "scripts": {
     "dev": "nuxi dev .docs",
     "dev:prepare": "nuxt prepare .docs",
