@@ -18,15 +18,19 @@ const changeThemeColor = (color: string) => {
   currentTheme.value = color;
   refreshThemeColors();
 };
+
+const { pause, resume } = useIntervalFn(refreshThemeColors, 2000);
 </script>
 
 <template>
   <button
     v-for="(_themeColor, themeIndex) of themeColors"
     :key="themeIndex"
-    class="group h-full cursor-pointer rounded-lg ring transition hover:opacity-90 hover:ring-offset-2"
     :style="`background-color: ${_themeColor}; --tw-ring-color: ${_themeColor}`"
+    class="group h-full cursor-pointer rounded-lg ring transition hover:opacity-90 hover:ring-offset-2"
     @click="changeThemeColor(_themeColor)"
+    @mouseenter="pause"
+    @mouseleave="resume"
   >
     <div
       class="relative inline-flex gap-x-1 font-bold opacity-0 transition group-hover:opacity-100"
