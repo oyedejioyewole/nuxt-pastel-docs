@@ -36,7 +36,7 @@ useSeoMeta({
   <main v-if="data">
     <AppHeader
       v-if="data.displayToc"
-      class="gap-x-4"
+      class="min-lg:grid-cols-[1fr_auto] gap-x-4 max-lg:grid-rows-[auto_1fr]"
       left-slot-classes="justify-center max-lg:grid max-lg:w-full max-lg:flex-1 max-lg:place-content-center max-lg:justify-start"
       right-slot-classes="space-y-4 max-lg:w-full max-lg:pt-4"
     >

@@ -14,13 +14,13 @@ const { pastelDocs } = useAppConfig();
   <header
     :class="
       twMerge(
-        `min-lg:h-[calc(100vh_-_102px)] w-9/10 min-lg:justify-between min-xl:justify-around mx-auto flex items-center justify-around max-lg:min-h-[calc(100vh_-_70px)] max-lg:flex-col-reverse`,
+        `min-lg:h-[calc(100vh_-_102px)] w-9/10 min-lg:justify-between min-xl:justify-around min-lg:grid-cols-2 mx-auto grid items-center max-lg:min-h-[calc(100vh_-_70px)] max-lg:grid-rows-2`,
         $props.class,
       )
     "
   >
     <!-- 1st column -->
-    <div :class="twMerge('space-y-4', $props.leftSlotClasses)">
+    <div :class="twMerge('basis-1/2 space-y-4', $props.leftSlotClasses)">
       <slot>
         <!-- Tagline -->
         <ProseH1>
@@ -54,7 +54,10 @@ const { pastelDocs } = useAppConfig();
     </div>
 
     <!-- 2nd column -->
-    <div v-if="$slots['aside']" :class="twMerge('', $props.rightSlotClasses)">
+    <div
+      v-if="$slots['aside']"
+      :class="twMerge('max-lg:order-first', $props.rightSlotClasses)"
+    >
       <slot name="aside" />
     </div>
   </header>
