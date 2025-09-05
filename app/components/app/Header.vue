@@ -20,7 +20,9 @@ const { pastelDocs } = useAppConfig();
     "
   >
     <!-- 1st column -->
-    <div :class="twMerge('basis-1/2 space-y-4', $props.leftSlotClasses)">
+    <div
+      :class="twMerge('@container basis-1/2 space-y-4', $props.leftSlotClasses)"
+    >
       <slot>
         <!-- Tagline -->
         <ProseH1>
@@ -39,7 +41,7 @@ const { pastelDocs } = useAppConfig();
           </li>
         </ul>
 
-        <div class="flex flex-wrap gap-4">
+        <div class="@max-[22.5rem]:mb-4 flex flex-wrap gap-4">
           <UiButton to="/get-started" icon="book-open"> Get started </UiButton>
 
           <UiButton
