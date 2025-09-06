@@ -2,6 +2,7 @@
 import randomColor from "randomcolor";
 
 const colorMode = useColorMode();
+const { pastelDocs } = useAppConfig();
 
 const { data: themeColors, refresh: refreshThemeColors } = useAsyncData(
   async () =>
@@ -12,10 +13,8 @@ const { data: themeColors, refresh: refreshThemeColors } = useAsyncData(
   { watch: [colorMode] },
 );
 
-const currentTheme = useCookie("theme-color");
-
-const changeThemeColor = (color: string) => {
-  currentTheme.value = color;
+const changeThemeColor = (themeColor: string) => {
+  updateAppConfig({ pastelDocs: { ...pastelDocs, themeColor } });
   refreshThemeColors();
 };
 
@@ -33,12 +32,15 @@ const { pause, resume } = useIntervalFn(refreshThemeColors, 2000);
     @mouseleave="resume"
   >
     <div
-      class="relative inline-flex gap-x-1 font-bold opacity-0 transition group-hover:opacity-100 group-focus:opacity-100"
+      class="relative inline-flex gap-x-1 font-bold opacity-0 transition group-hover:opacity-100 max-lg:group-focus:opacity-100"
       :class="{
         'inset-y-[calc(50%_+_20px)] items-start': themeIndex > 2,
         '-inset-y-[calc(50%_+_20px)] items-end': !(themeIndex > 2),
       }"
     >
+      <span v-if="_themeColor === pastelDocs.themeColor" class="font-cursive"
+        >Original:</span
+      >
       {{ _themeColor }}
 
       <UiIcon
