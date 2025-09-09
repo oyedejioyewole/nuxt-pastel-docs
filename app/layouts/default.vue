@@ -30,11 +30,9 @@ const themePalette = computed(() => {
       class="bg-primary-100 dark:bg-primary-900 text-primary-900 dark:text-primary-100 selection:bg-primary-200 dark:selection:bg-primary-800"
     >
       <div
-        class="bg-primary-100/70 dark:bg-primary-900/70 inset-0 z-10 backdrop-blur-lg max-lg:sticky max-lg:border-b"
+        class="bg-primary-100/70 dark:bg-primary-900/70 border-primary-900/30 dark:border-primary-100/30 top-0 z-10 border-b backdrop-blur-lg max-lg:sticky"
       >
-        <AppNavigation
-          class="min-lg:py-8 w-9/10 mx-auto flex items-center justify-between py-4"
-        />
+        <AppNavigation />
       </div>
 
       <slot />

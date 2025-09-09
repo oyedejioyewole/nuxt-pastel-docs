@@ -10,12 +10,14 @@ const { data: latestRelease } = await useFetch<{
 </script>
 
 <template>
-  <nav>
+  <nav
+    class="min-lg:py-8 w-9/10 min-xl:w-8/10 mx-auto flex items-center justify-between py-4"
+  >
     <div class="inline-flex items-center gap-x-4">
       <!-- Logo and project name -->
       <NuxtLink
-        to="/"
         class="font-cursive inline-flex items-center gap-x-2 font-bold transition-opacity hover:opacity-70"
+        to="/"
       >
         <AppLogo class="w-8" />
 
