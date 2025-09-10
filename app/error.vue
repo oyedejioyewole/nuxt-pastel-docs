@@ -12,7 +12,7 @@ const handleError = async () => await clearError({ redirect: "/" });
 <template>
   <NuxtLayout>
     <section
-      class="min-lg:h-[calc(100vh_-_96px)] grid place-items-center max-lg:h-[calc(100vh_-_64px)]"
+      class="min-lg:h-[calc(100vh_-_102px)] grid place-items-center max-lg:h-[calc(100vh_-_70px)]"
     >
       <div class="space-y-4 text-center">
         <h1 class="min-xl:text-4xl font-serif text-2xl font-bold">

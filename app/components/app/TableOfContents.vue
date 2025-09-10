@@ -1,15 +1,14 @@
 <script lang="ts" setup>
 import type { ContentCollectionItem } from "@nuxt/content";
-import { unref } from "#imports";
 
 const route = useRoute();
 
-const data = computed(() =>
+const content = computed(() =>
   unref(useNuxtData<ContentCollectionItem>(`page-${route.params.path}`).data),
 );
 
 const tableOfContents = computed(() => {
-  const tableOfContents = data.value?.body.toc;
+  const tableOfContents = content.value?.body.toc;
   if (!tableOfContents) return;
 
   return tableOfContents.links.map((link) => ({

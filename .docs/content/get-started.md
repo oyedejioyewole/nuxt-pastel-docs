@@ -1,8 +1,10 @@
 ---
-title: Get started
-description: This page would get you started on creating your own pastel themed documentation.
 displayToc: true
 ---
+
+# Get started
+
+This page would get you started on creating your own pastel themed documentation.
 
 ## Introduction
 
@@ -77,14 +79,14 @@ The `pastelDocs` follows this schema:
 interface AppConfig {
   pastelDocs: {
     components: {
-      seo: string
-    },
-    features: string[],
-    headline: string,
-    icons: Record<string, string>,
-    repo: string,
-    themeColor: string,
-  }
+      seo: string;
+    };
+    features: string[];
+    headline: string;
+    icons: Record<string, string>;
+    repo: string;
+    themeColor: string;
+  };
 }
 ```
 
@@ -138,10 +140,10 @@ A snippet is provided below:
 export default defineAppConfig({
   pastelDocs: {
     components: {
-      seo: 'MySexyOgComponent'
-    }
-  }
-})
+      seo: "MySexyOgComponent",
+    },
+  },
+});
 ```
 
 #tab-4
