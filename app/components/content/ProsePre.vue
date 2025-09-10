@@ -10,7 +10,7 @@
         <span class="font-cursive">{{ $props.filename }}</span>
       </p>
 
-      <pre class="overflow-x-auto text-sm" :class="$props.class"><slot /></pre>
+      <pre class="text-wrap text-sm" :class="$props.class"><slot /></pre>
     </div>
 
     <UiButton

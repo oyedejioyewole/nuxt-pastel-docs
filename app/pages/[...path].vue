@@ -14,16 +14,6 @@ if (!data.value) {
   });
 }
 
-const tableOfContents = computed(() => {
-  const tableOfContents = data.value?.body.toc;
-  if (!tableOfContents) return;
-
-  return tableOfContents.links.map((link) => ({
-    hash: link.id,
-    name: link.text,
-  }));
-});
-
 useSeoMeta({
   title: data.value.title,
   description: data.value.description,
@@ -38,20 +28,21 @@ useSeoMeta({
       <div>
         <header class="flex min-h-screen flex-col justify-center gap-y-4">
           <ProseH1>{{ data.title }}</ProseH1>
-          <p class="max-w-[60ch]">{{ data.description }}</p>
+          <p>{{ data.description }}</p>
         </header>
 
         <ContentRenderer :value="data" class="space-y-4 text-pretty" />
+
+        <AppTableOfContents />
       </div>
 
-      <!-- Inspect this ... -->
       <aside
         v-if="data.displayToc"
-        class="border-primary-900/30 dark:border-primary-100/30 min-lg:border-l bg-blue-200 max-lg:order-first max-lg:border-b"
+        class="border-primary-900/30 dark:border-primary-100/30 min-lg:border-l max-lg:order-first"
       >
-        <div class="min-lg:translate-y-8 sticky top-0 flex flex-col gap-y-4">
+        <div class="min-lg:translate-y-8 sticky inset-0 flex flex-col gap-y-4">
           <NuxtLink
-            class="min-lg:px-4 inline-flex items-center gap-x-2 font-bold underline-offset-4 hover:underline"
+            class="min-lg:px-4 min-lg:inline-flex hidden items-center gap-x-2 font-bold underline-offset-4 hover:underline"
             to="/"
           >
             <UiIcon
@@ -62,25 +53,7 @@ useSeoMeta({
             Go home
           </NuxtLink>
 
-          <div
-            class="border-primary-900/30 dark:border-primary-100/30 w-auto border-t border-dashed"
-          >
-            <h3 class="font-cursive p-4 text-xl font-bold max-lg:px-0">
-              On this page:
-            </h3>
-
-            <ul class="max-h-[75vh] space-y-4 overflow-y-auto pb-2">
-              <li
-                v-for="entry of tableOfContents"
-                :key="entry.hash"
-                class="min-lg:px-4 group hover:border-l"
-              >
-                <a class="group-hover:font-bold" :href="`#${entry.hash}`">{{
-                  entry.name
-                }}</a>
-              </li>
-            </ul>
-          </div>
+          <AppTableOfContents class="max-lg:hidden" />
         </div>
       </aside>
     </div>
