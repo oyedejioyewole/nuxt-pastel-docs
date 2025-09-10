@@ -39,8 +39,10 @@ const content = computed(() =>
         class="bg-primary-100/70 dark:bg-primary-900/70 top-0 z-10 backdrop-blur-lg max-lg:sticky"
       >
         <div
-          class="border-primary-900/30 dark:border-primary-100/30"
-          :class="{ 'border-b': content?.displayToc }"
+          class="border-primary-900/30 dark:border-primary-100/30 max-lg:border-b"
+          :class="{
+            'border-b': content && $route.name === 'path',
+          }"
         >
           <AppNavigation />
         </div>
