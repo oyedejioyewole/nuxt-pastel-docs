@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const { pastelDocs } = useAppConfig();
 
-defineOgImageComponent(pastelDocs.components.ogImage, {
+defineOgImageComponent("NuxtSeo", {
   theme: pastelDocs.themeColor,
 });
 </script>

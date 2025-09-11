@@ -8,79 +8,68 @@ This page would get you started on creating your own pastel themed documentation
 
 ## Introduction
 
-Hey :wave:, you might be wondering why I made this project?
+Hey :wave:, you might wonder why I made this project?
 
-**My answer:**
+**The answer:**
 
-I got tired of re-using and sharing files and configurations among documentations I created.
-
-During a scrolling montage on **YouTube Shorts** I discovered `layers` in `Nuxt` and to be honest, my life hasn't been the same.
-
-This project is an attempt at utilizing the power of `layers` to  share opinionated design patterns and configurations among all my documentations.
-
-My attempt at giving the community a **_clean :black_nib:, performant :rocket: and monochromatic :art:_**{.font-cursive} documentation theme.
+I got tired of re-using and sharing files and configurations among documentations I created. So this project is an attempt at creating a **_clean :black_nib: &mdash; performant :rocket: &mdash; and monochromatic :art:_**{.font-cursive} theme utilizing the power of `layers`
 
 ## Quick start
 
-To use a `layer` in your project, I suggest you checkout [this page from the Nuxt team](https://nuxt.com/docs/4.x/getting-started/layers) which explains a lot about what  `layers` are and how to use them.
+For more information about `layers` I suggest you checkout this page &mdash; [Authoring Nuxt Layers](https://nuxt.com/docs/4.x/guide/going-further/layers)
 
-But the general gist is:
+Follow the steps below to have the base setup for your pastel themed documentation:
 
 1. Create a new project &mdash; obviously.
-2. Append the following to the `nuxt.config`
+2. Add the following to the `nuxt.config.ts`
 
-  ```ts [nuxt.config]
-  export default defineNuxtConfig({
-    extends: [['github:oyedejioyewole/nuxt-pastel-docs', { install: true }]]
-  })
-  ```
-  This should add this project as a base layer which you can then build on top.
+**Info:** This command adds `nuxt-pastel-docs` as a remote layer and its installs dependencies.
 
-3. Create a `content.config.ts` with the contents below:
+```ts [nuxt.config]
+export default defineNuxtConfig({
+  extends: [["github:oyedejioyewole/nuxt-pastel-docs", { install: true }]],
+});
+```
 
-  ```ts [content.config]
-  import { defineContentConfig, defineCollection, z } from '@nuxt/content'
-  
-  export default defineContentConfig({
-    collections: {
-      content: defineCollection({
-        type: 'page',
-        source: '**/*.md',
-        schema: z.object({
-          displayToc: z.boolean().default(false)
-        })
-      })
-    }
-  })
-  ```
-  
-  **Summary:**
-  
-  This tells [@nuxt/content](https://content.nuxt.com) to look for `.md` files and also expect a custom schema object: `{ displayToc: boolean }`
-  
-  This custom schema toggles whether to display a header containing the title, description and a table of contents on all pages with this property (apart from the `'/'` route).
-  
-  Perfect, now you can enjoy writing your documentation with my **_highly opinionated_**{.font-cursive} takes on UI design :sparkles:
+3. Create a `content.config.ts` with the following content:
 
+**Info:** This defines a schema where `displayToc` determines whether the table of contents would be shown for content pages.
+
+```ts [content.config]
+import { defineContentConfig, defineCollection, z } from "@nuxt/content";
+
+export default defineContentConfig({
+  collections: {
+    content: defineCollection({
+      type: "page",
+      source: "**/*.md",
+      schema: z.object({
+        displayToc: z.boolean().default(false),
+      }),
+    }),
+  },
+});
+```
+
+4. Install [@nuxt/content](https://content.nuxt.com) as a `dependency`
+
+**Info:** Apparently, `@nuxt/content` wouldn't be recognized in your project if you try and start the development server.
+
+<br>
+
+Perfect, now you can enjoy writing your documentation with my **_highly opinionated_**{.font-cursive} takes on UIs :sparkles:
 
 ## Configuration
 
-Now let's head into customizing this theme to truly make it yours.
+Now for the fun part, customization :sparkles:.
 
 ### Create an `app.config.ts`
 
-If you want to tweak app-level configurations, provide a `pastelDocs` object.
-
-**Note:** I suggest you tweak them else you'd end up with the values used to build this site.
-
-The `pastelDocs` follows this schema:
+This allows you to customize properties like the `features` list &mdash; the `themeColor` &mdash; and the `headline` etc. through the `pastelDocs` object which follows this schema:
 
 ```ts
 interface AppConfig {
   pastelDocs: {
-    components: {
-      seo: string;
-    };
     features: string[];
     headline: string;
     icons: Record<string, string>;
@@ -90,73 +79,75 @@ interface AppConfig {
 }
 ```
 
-See, I did not pollute your entire `app.config` with properties, so there won't be conflicts with your options.
-
-Pretty considerate, yeah? Yes, I know.
-
 ### Overriding components
 
-If you're really salty about my design choices, you can decide to roll out your own version of components to truly bring your stroke-inducing design choices to life.
+If you really don't like my design choices and kind of defeats the entire purpose of using this project &mdash; you can decide to roll out your own components and battle with keeping everything in balance.
 
 The structure of the `components` directory is given below:
 
-::UiTabs{:tabs='["app/", "content/", "og-image/", "ui/"]'}
-#tab-1
+<!-- Tabs of directory structure -->
 
+<!-- prettier-ignore-start -->
+::UiTabs{:tabs='["app/", "content/", "og-image/", "ui/"]'}
+
+<!-- `app/` tab -->
+#tab-1
 This folder contains components that define sections in the theme.
 
-  ::UiTabs{:tabs='["Header.vue", "Logo.vue", "Navigation.vue"]'}
-  
-  #tab-1
-  
-  **Note:** I'm still working on this part of the documentation.
-  
-  #tab-2
-  ...
-  
-  #tab-3
-  ...
+  <!-- Sub-tabs of app/ -->
+  ::UiTabs{:tabs='["Header.vue", "Logo.vue", "Navigation.vue", "TableOfContents.vue"]' :prefix="app-files"}
+  #app-files-1
+    **Note:** I'm still working on this part of the documentation.
+
+  #app-files-2
+    ...
+
+  #app-files-3
+    ...
+
+  #app-files-4
+    ...
   ::
 
+<!-- `content/` tab -->
 #tab-2
+  These are overriden components from [@nuxtjs/mdc](https://github.com/nuxt-modules/mdc/tree/main/src/runtime/components/prose)
 
-This folder contains components from [@nuxtjs/mdc](https://github.com/nuxt-modules/mdc/tree/main/src/runtime/components/prose) I felt needed the touch of my design fingers.
-
+<!-- `og-image/` tab -->
 #tab-3
 
-This folder contains only the [NuxtSeo](https://nuxtseo.com/docs/og-image/guides/community-templates) community template from [nuxt-og-image](https://nuxtseo.com/docs/og-image/getting-started/introduction) as I enabled the [zeroRuntime](https://nuxtseo.com/docs/og-image/guides/zero-runtime) configuration.
+  This folder contains only the [NuxtSeo](https://nuxtseo.com/docs/og-image/guides/community-templates) community template from [nuxt-og-image](https://nuxtseo.com/docs/og-image/getting-started/introduction) as I enabled the [zeroRuntime](https://nuxtseo.com/docs/og-image/guides/zero-runtime) configuration.
 
-**Why?** &mdash; It's just for the love of the game.
+  **Why?** &mdash; It's just for the love of the game.
 
-**What does this mean?**
+  **What does this mean?**
 
-If you don't like the default, you pretty much have to write your own SEO component yourself or pick from the [various templates](https://github.com/nuxt-modules/og-image/tree/main/src/runtime/app/components/Templates/Community)
+  If you don't like the default, you pretty much have to write your own SEO component yourself or pick from the [various templates](https://github.com/nuxt-modules/og-image/tree/main/src/runtime/app/components/Templates/Community)
 
-If you're extra picky, you can customize the name of the component you use for SEO &mdash; not like that'll help your documentation much :smile:.
+  If you're extra picky, you can customize the name of the component you use for SEO &mdash; not like that'll help your documentation much :smile:.
 
-A snippet is provided below:
+  A snippet is provided below:
 
-```ts [app.config.ts]
-export default defineAppConfig({
-  pastelDocs: {
-    components: {
-      seo: "MySexyOgComponent",
+  ```ts [app.config.ts]
+  export default defineAppConfig({
+    pastelDocs: {
+      components: {
+        seo: "MySexyOgComponent",
+      },
     },
-  },
-});
-```
+  });
+  ```
 
+<!-- `ui/` tab -->
 #tab-4
+  This folder contains components that do UI stuff.
 
-This folder contains components that do UI stuff.
+  <!-- Sub-tabs of ui/ -->
+  ::UiTabs{:tabs='["Button.vue", "Icon.vue", "Tabs.vue"]' :prefix="ui-files"}
 
-::UiTabs{:tabs='["Button.vue", "Icon.vue", "Tabs.vue"]'}
+  #ui-files-1
 
-#tab-1
-
-#### Examples
-
-This section should be self-explanatory
+  #### Example
 
   ::GetStartedButton
   Mhmm, click me
@@ -165,68 +156,64 @@ This section should be self-explanatory
   ::GetStartedButton{:variant="accent" :extra=true}
   You know you want to
   ::
+
+  1. `class` &mdash; extra CSS classes that get merged with the base CSS classes.
+  2. `icon` &mdash; choose an icon to render using [nuxt-phosphor-icons](https://nuxt-phosphor-icons.vercel.app)
+  3. `to` &mdash; if present, converts the button to a link.
+  4. `variant` &mdash; just look above, you'd see it.
+
+  This component also has slots you can utilize, namely:
+
+  1. `#icon` &mdash; specify a custom element in place for the default icon provided.
+
+  #ui-files-2
+  This theme uses for [nuxt-phosphor-icons](https://nxut-phosphor-icons.vercel.app) for icon support.
   
-1. `class` &mdash; custom CSS classes that'll get merged with the base CSS classes, courtesy of [tailwind-merge](https://www.npmjs.com/package/tailwind-merge)
-2. `icon` &mdash; choose an icon to render from the [phosphor-icons](https://phosphoricons.com) library. Courtesy of [nuxt-phosphor-icons](https://nuxt-phosphor-icons.vercel.app/get-started#usage)
-3. `to` &mdash; determines whether the button should be a link (which resolves to [NuxtLink](https://nuxt.com/docs/4.x/api/components/nuxt-link)) or not.
-4. `variant` &mdash; need I talk?
+  **Note:** Use `UiIcon` component to render icons.
 
-This component also has slots you can utilize, namely:
+  #ui-files-3
 
-1. `#icon` &mdash; specify a custom element in place for the default icon provided.
+  #### Examples
 
-#tab-2
-Due to the use of [nuxt-phosphor-icons](https://nxut-phosphor-icons.vercel.app) (cause I'm genuinely lazy), we have icon support, yay :confetti_ball:.
+  ::UiTabs{:tabs='["Tab 1", "Tab 2"]' :prefix="ui-tabs-example"}
+  #ui-tabs-example-1
+    There's nothing to see, scooch along now
 
-**Note:** You can use the component as `UiIcon` :upside_down_face:
-
-#tab-3
-
-This section should be self-explanatory, as that's what you used to reach this point &mdash; duhhhh. :roll_eyes:
-
-#### Examples
-
-  ::UiTabs{:tabs='["Tab 1", "Tab 2"]'}
-  #tab-1
-  There's nothing to see, scooch along now
-  
-  #tab-2
-  You saw the first tab and really thought there'd be something here instead? 🥴
+  #ui-tabs-example-2
+    You saw the first tab and really thought there'd be something here instead?
   ::
 
-`tabs` &mdash; an array of strings which build up a tab.
+  1. `tabs` &mdash; an array of strings which build up a tab. **(Required)**
 
-These stuff below are meant to be examples, I guess:
+  ```vue [YourSexyComponent]
+  <UiTabs :tabs="['1', '2', '3']">
+    <template #tab-1>
+      doh
+    </template>
+    <template #tab-2>
+      reh
+    </template>
+    <template #tab-3>
+      mi
+    </template>
+  </UiTabs>
+  ```
 
-```vue [YourSexyComponent]
-<UiTabs :tabs="['1', '2', '3']">
-  <template #tab-1>
+  2. `prefix` &mdash; prefix for the slot used to render content for tabs
+  
+  ```md [content]
+  ::UiTabs{:tabs="['1', '2','3']" :prefix="numbers"}
+  #numbers-1
   doh
-  </template>
-  <template #tab-2>
+
+  #numbers-2
   reh
-  </template>
-  <template #tab-3>
+
+  #numbers-3
   mi
-  </template>
-</UiTabs>
-```
-
-or
-
-```md [content]
-::UiTabs{:tabs="['1', '2','3']"}
-#tab-1
-doh
-
-#tab-2
-reh
-
-#tab-3
-mi
-::
-```
-
+  ::
+  ```
+  ::
 ::
 
-::
+<!--  prettier-ignore-end -->

@@ -31,6 +31,11 @@ export default defineNuxtConfig({
       },
     },
   },
+  vite: {
+    optimizeDeps: {
+      include: ["debug"],
+    },
+  },
   compatibilityDate: "2025-08-02",
   ogImage: {
     zeroRuntime: true,

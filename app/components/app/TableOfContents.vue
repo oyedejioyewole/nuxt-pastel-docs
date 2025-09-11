@@ -8,10 +8,12 @@ const content = computed(() =>
 );
 
 const tableOfContents = computed(() => {
-  const tableOfContents = content.value?.body.toc;
-  if (!tableOfContents) return;
+  if (!content.value || !content.value.displayToc) return;
 
-  return tableOfContents.links.map((link) => ({
+  const entries = content.value.body.toc?.links;
+  if (!entries || entries.length < 1) return;
+
+  return entries.map((link) => ({
     hash: link.id,
     name: link.text,
   }));
@@ -23,7 +25,8 @@ const isTableOfContentsToggled = shallowRef(false);
 <template>
   <div
     v-if="tableOfContents"
-    class="border-primary-900/30 dark:border-primary-100/30 min-lg:py-4 min-lg:space-y-4 min-lg:border-y border-dashed"
+    id="table-of-contents"
+    class="border-primary-900/30 dark:border-primary-100/30 min-lg:py-4 min-lg:space-y-4 min-lg:border-y max-lg:border-dashed"
   >
     <h3 class="font-cursive px-4 text-xl font-bold max-lg:hidden">
       On this page:

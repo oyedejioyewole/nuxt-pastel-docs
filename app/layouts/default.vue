@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import type { ContentCollectionItem } from "@nuxt/content";
 import { tailwindcssPaletteGenerator } from "@bobthered/tailwindcss-palette-generator";
 
 const { pastelDocs } = useAppConfig();
-const route = useRoute();
 
 useSeoMeta({
   titleTemplate: `%s · ${pastelDocs.repo.split("/").at(1)}`,
@@ -24,10 +22,6 @@ const themePalette = computed(() => {
     return accumulator;
   }, "");
 });
-
-const content = computed(() =>
-  unref(useNuxtData<ContentCollectionItem>(`page-${route.params.path}`).data),
-);
 </script>
 
 <template>
@@ -38,18 +32,15 @@ const content = computed(() =>
       <div
         class="bg-primary-100/70 dark:bg-primary-900/70 top-0 z-10 backdrop-blur-lg max-lg:sticky"
       >
-        <div
-          class="border-primary-900/30 dark:border-primary-100/30 max-lg:border-b"
-          :class="{
-            'border-b': content && $route.name === 'path',
-          }"
-        >
-          <AppNavigation />
+        <div class="border-primary-900/30 dark:border-primary-100/30 border-b">
+          <AppNavigation
+            class="min-lg:py-8 w-9/10 min-xl:w-8/10 mx-auto flex items-center justify-between py-4"
+          />
         </div>
 
         <div
-          class="border-primary-900/30 dark:border-primary-100/30 border-dashed"
-          :class="{ 'max-lg:border-b': content?.displayToc }"
+          class="border-primary-900/30 dark:border-primary-100/30 border-dashed has-[#table-of-contents]:max-lg:border-b"
+          data-allow-mismatch="children"
         >
           <AppTableOfContents
             class="min-lg:hidden w-9/10 min-xl:w-8/10 mx-auto"
@@ -58,6 +49,10 @@ const content = computed(() =>
       </div>
 
       <slot />
+
+      <div class="border-primary-900/30 dark:border-primary-100/30 border-t">
+        <AppFooter />
+      </div>
     </Body>
   </Html>
 </template>

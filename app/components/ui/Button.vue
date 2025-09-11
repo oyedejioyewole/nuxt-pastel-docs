@@ -17,7 +17,7 @@ const NuxtLink = resolveComponent("NuxtLink");
 
 const classes = computed(() => {
   const baseClasses =
-    "inline-flex w-fit select-none items-center gap-x-2 rounded-lg px-4 py-2 text-sm font-bold selection:bg-transparent";
+    "inline-flex w-fit select-none items-center gap-x-2 rounded-lg px-4 py-2 text-sm font-bold selection:bg-transparent cursor-pointer";
 
   switch (props.variant) {
     case "accent":
@@ -38,8 +38,8 @@ const remappedIcon = computed(() => {
 <template>
   <component
     :is="$props.to ? NuxtLink : 'button'"
-    :to="$props.to"
     :class="twMerge(classes, $props.class)"
+    :to="$props.to"
   >
     <!-- Icon -->
     <slot name="icon">

@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-defineProps<{ tabs: string[] }>();
+withDefaults(defineProps<{ tabs: string[]; prefix?: string }>(), {
+  prefix: "tab",
+});
 
 const activeTab = shallowRef(1);
 </script>
@@ -28,11 +30,12 @@ const activeTab = shallowRef(1);
 
     <div
       v-for="index in $props.tabs.length"
-      :key="index"
+      :id="`${$props.prefix}-${index}`"
+      :key="`${$props.prefix}-${index}`"
       v-auto-animate
       class="space-y-4"
     >
-      <slot v-if="index === activeTab" :name="`tab-${index}`" />
+      <slot v-if="index === activeTab" :name="`${$props.prefix}-${index}`" />
     </div>
   </div>
 </template>

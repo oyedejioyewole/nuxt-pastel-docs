@@ -1,10 +1,12 @@
 export default defineAppConfig({
   pastelDocs: {
-    components: {
-      ogImage: "NuxtSeo",
+    features: [],
+    footer: {
+      content: "Made with :heart:",
+      icons: {} as Record<string, string>,
     },
     headline: "This is the headline",
-    icons: {} as Partial<Record<string, string>>,
+    icons: {} as Record<string, string>,
     repo: "your-username/your-repo",
     themeColor: "#D64045",
   },

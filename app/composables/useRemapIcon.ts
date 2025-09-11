@@ -3,7 +3,7 @@ import type { PhosphorIconName } from "#phosphor-icons/types";
 export default <
   IconWithConditions extends Partial<Record<PhosphorIconName, boolean>>,
 >(
-  icon: IconWithConditions | string,
+  icon: IconWithConditions | PhosphorIconName,
 ) => {
   const { pastelDocs } = useAppConfig();
 
@@ -14,9 +14,9 @@ export default <
         condition,
       ]);
 
-      return Object.fromEntries(entries) as IconWithConditions;
+      return Object.fromEntries(entries) as typeof icon;
     }
     case "string":
-      return pastelDocs.icons[icon] ?? icon;
+      return (pastelDocs.icons[icon] ?? icon) as typeof icon;
   }
 };
