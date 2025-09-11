@@ -14,7 +14,7 @@ const { pastelDocs } = useAppConfig();
   <header
     :class="
       twMerge(
-        'min-lg:h-[calc(100vh_-_204px)] w-9/10 min-xl:w-8/10 min-lg:justify-between min-xl:justify-around min-lg:grid-cols-2 min-lg:gap-x-8 mx-auto grid items-center max-lg:min-h-[calc(100vh_-_140px)] max-lg:grid-rows-2',
+        'min-lg:h-[calc(100vh_-_102px)] w-9/10 min-xl:w-8/10 min-lg:justify-between min-xl:justify-around min-lg:grid-cols-2 min-lg:gap-x-8 mx-auto grid items-center max-lg:min-h-[calc(100vh_-_70px)] max-lg:grid-rows-2',
         $props.class,
       )
     "

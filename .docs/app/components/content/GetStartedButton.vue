@@ -1,15 +1,20 @@
 <script lang="ts" setup>
 import type { PhosphorIconName } from "#phosphor-icons/types";
 
-const { extra, variant = "primary" } = defineProps<{
-  extra?: boolean;
-  icon?: PhosphorIconName;
-  variant?: "accent" | "primary";
-}>();
+const props = withDefaults(
+  defineProps<{
+    extra?: boolean;
+    icon?: PhosphorIconName;
+    variant?: "accent" | "primary";
+  }>(),
+  {
+    variant: "primary",
+  },
+);
 
 const trollReader = () => {
-  if (extra) {
-    window.alert("You thought you were smart?");
+  if (props.extra) {
+    window.alert("You thought you were smart, hehe");
   }
 
   navigateTo(
