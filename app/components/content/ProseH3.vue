@@ -1,5 +1,5 @@
 <template>
-  <h3 class="text-balance font-serif text-xl font-bold" :id="props.id">
+  <h3 class="text-balance pt-4 font-serif text-xl font-bold" :id="props.id">
     <a
       v-if="props.id && generate"
       class="group relative inline-flex items-center decoration-dotted underline-offset-8 hover:underline"

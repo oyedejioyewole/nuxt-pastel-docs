@@ -25,7 +25,7 @@ useSeoMeta({
     <div
       class="min-lg:grid-cols-[80%_20%] min-xl:grid-cols-[85%_15%] w-9/10 min-xl:w-8/10 min-lg:gap-x-8 relative mx-auto grid min-h-screen max-lg:grid-rows-[auto_1fr]"
     >
-      <ContentRenderer :value="content" class="space-y-4 text-pretty" />
+      <ContentRenderer :value="content" class="space-y-4 text-pretty py-8" />
 
       <aside
         v-if="content.displayToc"

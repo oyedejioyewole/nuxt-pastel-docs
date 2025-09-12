@@ -13,10 +13,18 @@ const tableOfContents = computed(() => {
   const entries = content.value.body.toc?.links;
   if (!entries || entries.length < 1) return;
 
-  return entries.map((link) => ({
-    hash: link.id,
-    name: link.text,
-  }));
+  return entries.flatMap((link) => [
+    {
+      hash: link.id,
+      name: link.text,
+      level: link.depth,
+    },
+    ...(link.children ?? []).map((child) => ({
+      hash: child.id,
+      name: child.text,
+      level: child.depth,
+    })),
+  ]);
 });
 
 const isTableOfContentsToggled = shallowRef(false);
@@ -57,11 +65,20 @@ const isTableOfContentsToggled = shallowRef(false);
       <li
         v-for="entry of tableOfContents"
         :key="entry.hash"
-        class="group px-4 hover:border-l"
+        :class="{
+          'pl-8': entry.level === 3,
+          'pl-4': entry.level === 2,
+        }"
+        class="group hover:border-l"
       >
-        <a class="group-hover:font-bold" :href="`#${entry.hash}`">{{
-          entry.name
-        }}</a>
+        <a
+          class="transition-all duration-200 group-hover:font-bold"
+          :class="{
+            'text-sm': entry.level === 3,
+          }"
+          :href="`#${entry.hash}`"
+          >{{ entry.name }}</a
+        >
       </li>
     </ul>
   </div>

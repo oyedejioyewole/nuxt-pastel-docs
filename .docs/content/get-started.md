@@ -53,11 +53,11 @@ export default defineContentConfig({
 
 4. Install [@nuxt/content](https://content.nuxt.com) as a `dependency`
 
-**Info:** Apparently, `@nuxt/content` wouldn't be recognized in your project if you try and start the development server.
+**Info:** Apparently, if you don't install `@nuxt/content`, it wouldn't be recognized in your project if you try and start the development server.
 
 <br>
 
-Perfect, now you can enjoy writing your documentation with my **_highly opinionated_**{.font-cursive} takes on UIs :sparkles:
+Perfect, now you can enjoy writing your documentation with my **_highly opinionated_**{.font-cursive} design takes :sparkles:
 
 ## Configuration
 
@@ -71,9 +71,13 @@ This allows you to customize properties like the `features` list &mdash; the `th
 interface AppConfig {
   pastelDocs: {
     features: string[];
+    footer: {
+      content: string; // markdown templates are also parsed.
+      icons: Record<string, string>; // this is the format: { 'an-icon': 'https://example.com' }
+    };
     headline: string;
-    icons: Record<string, string>;
-    repo: string;
+    icons: Record<string, string>; // this is the format: { 'an-icon': remappedIcon }
+    repo: string; // this is the format: your-username/your-repo
     themeColor: string;
   };
 }
@@ -81,7 +85,7 @@ interface AppConfig {
 
 ### Overriding components
 
-If you really don't like my design choices and kind of defeats the entire purpose of using this project &mdash; you can decide to roll out your own components and battle with keeping everything in balance.
+If you really don't like my design choices (kind of defeats the entire purpose of using this project) &mdash; you can decide to roll out your own components and battle with keeping everything in balance.
 
 The structure of the `components` directory is given below:
 
@@ -95,23 +99,89 @@ The structure of the `components` directory is given below:
 This folder contains components that define sections in the theme.
 
   <!-- Sub-tabs of app/ -->
-  ::UiTabs{:tabs='["Header.vue", "Logo.vue", "Navigation.vue", "TableOfContents.vue"]' :prefix="app-files"}
+  ::UiTabs{:tabs='["Footer.vue", "Header.vue", "Logo.vue", "Navigation.vue", "TableOfContents.vue"]' :prefix="app-files"}
   #app-files-1
-    **Note:** I'm still working on this part of the documentation.
+    A responsive footer component that displays markdown content and social/external links. It's **_minimalist_**{.font-cursive} by design and adapts to different screen sizes gracefully.
+
+    **Features:**
+    1. **Markdown support** &mdash; footer content is parsed from markdown, so you can include links, formatting, etc.
+    2. **Dynamic icons** &mdash; social and external links are rendered as icons using the phosphor-icons library
+    3. **Responsive layout** &mdash; centers content on small screens, spreads on larger screens
+    4. **Container queries** &mdash; uses modern CSS container queries for adaptive sizing
+
+    **Configuration:**
+    The footer pulls its content from `app.config.ts`
+    ```ts
+    export default defineAppConfig({
+      pastelDocs: {
+        footer: {
+          content: "Made with ❤️ by [Your Name](https://yoursite.com)",
+          icons: {
+            "github-logo": "https://github.com/yourusername",
+            "twitter-logo": "https://twitter.com/yourusername"
+          }
+        }
+      }
+    })
+    ```
 
   #app-files-2
-    ...
+    The main header component that displays the hero section of your documentation. It's split into two responsive columns &mdash; perfect for showcasing your project's headline, features and a demo.
+
+    **Props:**
+    1. `class` &mdash; additional CSS classes for the header grid container
+    2. `leftSlotClasses` &mdash; CSS classes for the left column (content area)
+    3. `rightSlotClasses` &mdash; CSS classes for the right column (aside area)
+
+    **Slots:**
+    1. `default` &mdash; replaces the entire left column content (headline, features, buttons)
+    2. `aside` &mdash; content for the right column (images, demos, etc.)
+
+    The component uses `headline` &mdash; `features` &mdash; and `repo` from your `app.config.ts`
 
   #app-files-3
-    ...
+    A simple SVG logo component that renders the default Nuxt logo &mdash; which can be found [here](https://nuxt.com/design-kit)
 
   #app-files-4
-    ...
+    The top navigation bar that includes your project logo, name, latest release badge, and theme toggle. It's clean and stays out of your way.
+
+    **Features:**
+    1. **Project branding** &mdash; displays logo and repo name from your config
+    2. **Release badge** &mdash; automatically fetches and displays your latest GitHub release
+    3. **Theme toggle** &mdash; lets users switch between light, dark, and system themes
+    4. **Responsive design** &mdash; logo text hidden on mobile to save space
+
+    The component automatically reads your `repo` configuration and fetches release data from GitHub's API.
+
+  #app-files-5
+    An intelligent table of contents that automatically generates from your markdown headings. It's **_context-aware_**{.font-cursive} and only shows when needed.
+
+    **Behavior:**
+    1. Only appears if `displayToc: true` is set in your page frontmatter
+    2. Only shows if there are actual headings in your content
+    3. Collapsible on mobile devices to save screen space
+    4. Scrollable when content overflows
+
+    **Requirements:**
+    Make sure to add `displayToc: true` to your markdown frontmatter:
+    ```yaml
+    ---
+    displayToc: true
+    ---
+    ```
   ::
 
 <!-- `content/` tab -->
 #tab-2
-  These are overriden components from [@nuxtjs/mdc](https://github.com/nuxt-modules/mdc/tree/main/src/runtime/components/prose)
+  These are overridden components from [@nuxtjs/mdc](https://github.com/nuxt-modules/mdc/tree/main/src/runtime/components/prose) that provide enhanced styling for your markdown content.
+
+  **What's included:**
+  
+  The theme customizes prose components to match the **_pastel aesthetic_**{.font-cursive} &mdash; think better typography, consistent spacing, and subtle color variations that don't hurt your eyes during those late-night documentation sessions.
+
+  **Components that are overridden:**
+
+  `ProseH1` `ProseH2` `ProseH3` `ProseH4` `ProseA` `ProseCode` `ProsePre` `ProseOl` `ProseLi`
 
 <!-- `og-image/` tab -->
 #tab-3
@@ -124,20 +194,6 @@ This folder contains components that define sections in the theme.
 
   If you don't like the default, you pretty much have to write your own SEO component yourself or pick from the [various templates](https://github.com/nuxt-modules/og-image/tree/main/src/runtime/app/components/Templates/Community)
 
-  If you're extra picky, you can customize the name of the component you use for SEO &mdash; not like that'll help your documentation much :smile:.
-
-  A snippet is provided below:
-
-  ```ts [app.config.ts]
-  export default defineAppConfig({
-    pastelDocs: {
-      components: {
-        seo: "MySexyOgComponent",
-      },
-    },
-  });
-  ```
-
 <!-- `ui/` tab -->
 #tab-4
   This folder contains components that do UI stuff.
@@ -146,74 +202,98 @@ This folder contains components that define sections in the theme.
   ::UiTabs{:tabs='["Button.vue", "Icon.vue", "Tabs.vue"]' :prefix="ui-files"}
 
   #ui-files-1
+    A versatile button component that can transform into a link when needed. The current variants supported are:
 
-  #### Example
+    ::GetStartedButton{icon="target"}
+    I'm a target
+    ::
 
-  ::GetStartedButton
-  Mhmm, click me
-  ::
+    ::GetStartedButton{variant="accent" icon="eyes" extra}
+    Do you trust me?
+    ::
 
-  ::GetStartedButton{:variant="accent" :extra=true}
-  You know you want to
-  ::
+    #### Usage
+    ```vue
+    <UiButton to="/docs" icon="book-open" variant="accent">
+      Read the docs
+    </UiButton>
+    ```
 
-  1. `class` &mdash; extra CSS classes that get merged with the base CSS classes.
-  2. `icon` &mdash; choose an icon to render using [nuxt-phosphor-icons](https://nuxt-phosphor-icons.vercel.app)
-  3. `to` &mdash; if present, converts the button to a link.
-  4. `variant` &mdash; just look above, you'd see it.
+    **Props:**
+    1. `class` &mdash; extra CSS classes that get merged with the base styling
+    2. `icon` &mdash; choose an icon to render using [nuxt-phosphor-icons](https://nuxt-phosphor-icons.vercel.app)
+    3. `to` &mdash; if present, converts the button to a `NuxtLink`
+    4. `variant` &mdash; styling variant (default or accent)
 
-  This component also has slots you can utilize, namely:
+    **Slots:**
+    1. `default` &mdash; the button text content
+    2. `icon` &mdash; custom icon element to replace the default icon
 
-  1. `#icon` &mdash; specify a custom element in place for the default icon provided.
+    
 
   #ui-files-2
-  This theme uses for [nuxt-phosphor-icons](https://nxut-phosphor-icons.vercel.app) for icon support.
-  
-  **Note:** Use `UiIcon` component to render icons.
+    A shortcut to the component provided by the [nuxt-phosphor-icons](https://nuxt-phosphor-icons.vercel.app) library that provides icons throughout your documentation.
 
   #ui-files-3
+    An interactive tabbed interface component that makes organizing content **_effortless_**{.font-cursive}. Perfect for showing code examples, configuration options, or any grouped content.
 
-  #### Examples
+    **Props:**
+    1. `tabs` &mdash; array of tab names **(Required)**
+    2. `prefix` &mdash; optional prefix for slot names (useful for multiple tab components on the same page)
 
-  ::UiTabs{:tabs='["Tab 1", "Tab 2"]' :prefix="ui-tabs-example"}
-  #ui-tabs-example-1
-    There's nothing to see, scooch along now
+    **Slots:**
+    The component generates slots based on your tabs array. For tabs `["One", "Two"]`, you get:
+    - `#tab-1` for "One"
+    - `#tab-2` for "Two"
 
-  #ui-tabs-example-2
-    You saw the first tab and really thought there'd be something here instead?
-  ::
+    #### Usage
+    ```vue
+    <UiTabs :tabs="['Setup', 'Usage', 'Advanced']">
+      <template #tab-1>
+        Initial setup instructions...
+      </template>
+      <template #tab-2>
+        Basic usage examples...
+      </template>
+      <template #tab-3>
+        Advanced configuration...
+      </template>
+    </UiTabs>
+    ```
 
-  1. `tabs` &mdash; an array of strings which build up a tab. **(Required)**
+    **With prefix (for markdown):**
+    ```md
+    ::UiTabs{:tabs="['Config', 'Code']" :prefix="example"}
+    #example-1
+    Configuration details...
 
-  ```vue [YourSexyComponent]
-  <UiTabs :tabs="['1', '2', '3']">
-    <template #tab-1>
-      doh
-    </template>
-    <template #tab-2>
-      reh
-    </template>
-    <template #tab-3>
-      mi
-    </template>
-  </UiTabs>
-  ```
-
-  2. `prefix` &mdash; prefix for the slot used to render content for tabs
-  
-  ```md [content]
-  ::UiTabs{:tabs="['1', '2','3']" :prefix="numbers"}
-  #numbers-1
-  doh
-
-  #numbers-2
-  reh
-
-  #numbers-3
-  mi
-  ::
-  ```
+    #example-2
+    Code examples...
+    ::
+    ```
   ::
 ::
 
 <!--  prettier-ignore-end -->
+
+### Extending theme styles
+
+In cases you don't want to completely override components, you **_extend the existing styles_**{.font-cursive} with your own CSS classes or custom properties. This is where the locally registered theme module comes in handy.
+
+The layer automatically registers a Nuxt module that creates a CSS template accessible via the `#nuxt-pastel-docs` alias.
+
+#### Usage
+
+1. **Import the base theme styles** in your own CSS file:
+
+```css [assets/css/main.css]
+@import "#nuxt-pastel-docs";
+```
+
+2. **Register your CSS in your `nuxt.config.ts`**
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  css: ["~/assets/css/main.css"],
+});
+```

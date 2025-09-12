@@ -13,10 +13,6 @@ const props = withDefaults(
 );
 
 const trollReader = () => {
-  if (props.extra) {
-    window.alert("You thought you were smart, hehe");
-  }
-
   navigateTo(
     "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1",
     { external: true },
@@ -29,7 +25,7 @@ const trollReader = () => {
     <UiButton
       :icon="$props.icon"
       :variant="$props.variant"
-      @click="trollReader"
+      @click="$props.extra ? trollReader() : null"
     >
       <slot />
     </UiButton>

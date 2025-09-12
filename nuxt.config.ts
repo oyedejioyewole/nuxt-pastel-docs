@@ -28,6 +28,10 @@ export default defineNuxtConfig({
             default: "github-light",
           },
         },
+        toc: {
+          depth: 3,
+          searchDepth: 3,
+        },
       },
     },
   },

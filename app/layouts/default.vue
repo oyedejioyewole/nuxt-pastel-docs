@@ -27,7 +27,7 @@ const themePalette = computed(() => {
 <template>
   <Html class="scroll-smooth" lang="en" :style="themePalette">
     <Body
-      class="bg-primary-100 dark:bg-primary-900 text-primary-900 dark:text-primary-100 selection:bg-primary-200 dark:selection:bg-primary-800"
+      class="bg-primary-100 dark:bg-primary-900 text-primary-900 dark:text-primary-100 selection:bg-primary-900/20 dark:selection:bg-primary-100/20"
     >
       <div
         class="bg-primary-100/70 dark:bg-primary-900/70 top-0 z-10 backdrop-blur-lg max-lg:sticky"

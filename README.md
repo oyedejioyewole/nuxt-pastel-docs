@@ -1,73 +1,100 @@
-# Nuxt Layer Starter
+# Nuxt Pastel Docs
 
-Create Nuxt extendable layer with this GitHub template.
+A **_clean :black_nib: &mdash; performant :rocket: &mdash; and monochromatic :art:_** Nuxt layer for creating beautiful documentations.
 
-## Setup
+## Features
 
-Make sure to install the dependencies:
+- ✨ **Beautiful Design** &mdash; Pastel-themed, monochromatic aesthetic that's easy on the eyes
+- 🚀 **Performance First** &mdash; Built with modern web standards and optimized for speed
+- 📱 **Responsive Layout** &mdash; Looks great on desktop, tablet, and mobile devices
+- 🎨 **Customizable** &mdash; Easy theming through app.config.ts
+- 📖 **Content-Driven** &mdash; Powered by @nuxt/content with MDC support
+- 🌙 **Dark Mode** &mdash; Built-in theme switching with system preference detection
+- 🔍 **SEO Optimized** &mdash; Meta tags, OpenGraph images, and semantic HTML
+- 📋 **Table of Contents** &mdash; Auto-generated navigation for long pages
+- 🎯 **Zero Config** &mdash; Works out of the box with sensible defaults
 
-```bash
-pnpm install
-```
+## Quick Setup
 
-## Working on your layer
-
-Your layer is at the root of this repository, it is exactly like a regular Nuxt project, except you can publish it on NPM.
-
-The `.playground` directory should help you on trying your layer during development.
-
-Running `pnpm dev` will prepare and boot `.playground` directory, which imports your layer itself.
-
-## Distributing your layer
-
-Your Nuxt layer is shaped exactly the same as any other Nuxt project, except you can publish it on NPM.
-
-To do so, you only have to check if `files` in `package.json` are valid, then run:
-
-```bash
-npm publish --access public
-```
-
-Once done, your users will only have to run:
-
-```bash
-npm install --save your-layer
-```
-
-Then add the dependency to their `extends` in `nuxt.config`:
+1. Add it to your `extends` in `nuxt.config.ts`:
 
 ```ts
-defineNuxtConfig({
-  extends: 'your-layer'
-})
+export default defineNuxtConfig({
+  extends: [["github:oyedejioyewole/nuxt-pastel-docs", { install: true }]],
+});
 ```
 
-## Development Server
+2. Create a `content.config.ts` file:
 
-Start the development server on http://localhost:3000
+```ts
+import { defineContentConfig, defineCollection, z } from "@nuxt/content";
+
+export default defineContentConfig({
+  collections: {
+    content: defineCollection({
+      type: "page",
+      source: "**/*.md",
+      schema: z.object({
+        displayToc: z.boolean().default(false),
+      }),
+    }),
+  },
+});
+```
+
+3. Add your markdown files in the `content` directory. Example:
+
+```md
+---
+displayToc: true
+---
+
+# A breathe of fresh air
+
+Your content goes here ...
+```
+
+That's it! ✨
+
+**Note:**
+For a comprehensive guide, see the
+**[📖 documentation](https://nuxt-pastel-docs.vercel.app/get-started)**
+
+## Development
 
 ```bash
+# Install dependencies
+pnpm install
+
+# Start development server
 pnpm dev
-```
 
-## Production
+# Prepare Nuxt for development
+pnpm dev:prepare
 
-Build the application for production:
-
-```bash
-pnpm build
-```
-
-Or statically generate it with:
-
-```bash
+# Generate static site
 pnpm generate
-```
 
-Locally preview production build:
-
-```bash
+# Preview generated site
 pnpm preview
+
+# Lint and fix code
+pnpm lint
 ```
 
-Checkout the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Credits
+
+Built with:
+
+- [Nuxt 3](https://nuxt.com/)
+- [@nuxt/content](https://content.nuxt.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Phosphor Icons](https://phosphoricons.com/)
+
+---
+
+Made with ❤️ by [Oyedeji Oyewole](https://github.com/oyedejioyewole)
