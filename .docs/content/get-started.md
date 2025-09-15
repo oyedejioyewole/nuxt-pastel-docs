@@ -73,7 +73,7 @@ interface AppConfig {
     features: string[];
     footer: {
       content: string; // markdown templates are also parsed.
-      icons: Record<string, string>; // this is the format: { 'an-icon': 'https://example.com' }
+      iconLinks: Record<string, string>; // this is the format: { 'an-icon': 'https://example.com' }
     };
     headline: string;
     icons: Record<string, string>; // this is the format: { 'an-icon': remappedIcon }

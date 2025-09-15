@@ -12,7 +12,7 @@ export default defineAppConfig({
     footer: {
       content:
         "Made with :heart: by [oyedejioyewole](https://github.com/oyedejioyewole)",
-      icons: {
+      iconLinks: {
         "github-logo": "https://github.com/oyedejioyewole/nuxt-pastel-docs",
       } satisfies Partial<Record<PhosphorIconName, string>>,
     },

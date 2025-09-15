@@ -18,7 +18,10 @@ const { data } = useAsyncData(async () => {
   >
     <ContentRenderer :value="data.content" class="max-lg:text-center" />
 
-    <div v-for="[iconName, link] of Object.entries(data.icons)" :key="iconName">
+    <div
+      v-for="[iconName, link] of Object.entries(data.iconLinks)"
+      :key="iconName"
+    >
       <NuxtLink
         :to="link"
         :target="link.startsWith('http') ? '_blank' : '_self'"

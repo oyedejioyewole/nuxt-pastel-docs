@@ -3,7 +3,7 @@ export default defineAppConfig({
     features: [],
     footer: {
       content: "Made with :heart:",
-      icons: {} as Record<string, string>,
+      iconLinks: {} as Record<string, string>,
     },
     headline: "This is the headline",
     icons: {} as Record<string, string>,

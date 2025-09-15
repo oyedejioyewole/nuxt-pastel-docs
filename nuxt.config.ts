@@ -37,7 +37,7 @@ export default defineNuxtConfig({
   },
   vite: {
     optimizeDeps: {
-      include: ["debug"],
+      include: ["debug", "extend"],
     },
   },
   compatibilityDate: "2025-08-02",
