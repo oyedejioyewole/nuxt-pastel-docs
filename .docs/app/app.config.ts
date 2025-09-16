@@ -13,7 +13,6 @@ export default defineAppConfig({
       content:
         "Made with :heart: by [oyedejioyewole](https://github.com/oyedejioyewole)",
       iconLinks: {
-        "github-logo": "https://github.com/oyedejioyewole/nuxt-pastel-docs",
         "svgl:nuxt": "https://nuxt.com",
       } satisfies Partial<Record<PhosphorIconName | `svgl:${string}`, string>>,
     },
