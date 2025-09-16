@@ -14,7 +14,8 @@ export default defineAppConfig({
         "Made with :heart: by [oyedejioyewole](https://github.com/oyedejioyewole)",
       iconLinks: {
         "github-logo": "https://github.com/oyedejioyewole/nuxt-pastel-docs",
-      } satisfies Partial<Record<PhosphorIconName, string>>,
+        "svgl:nuxt": "https://nuxt.com",
+      } satisfies Partial<Record<PhosphorIconName | `svgl:${string}`, string>>,
     },
     headline: "Create beautiful pastel themed docs with Nuxt.",
     repo: "oyedejioyewole/nuxt-pastel-docs",

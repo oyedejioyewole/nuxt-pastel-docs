@@ -92,7 +92,7 @@ The structure of the `components` directory is given below:
 <!-- Tabs of directory structure -->
 
 <!-- prettier-ignore-start -->
-::UiTabs{:tabs='["app/", "content/", "og-image/", "ui/"]'}
+::UiTabs{:tabs='["app/", "content/", "og-image/", "ui/", "util/"]'}
 
 <!-- `app/` tab -->
 #tab-1
@@ -199,7 +199,7 @@ This folder contains components that define sections in the theme.
   This folder contains components that do UI stuff.
 
   <!-- Sub-tabs of ui/ -->
-  ::UiTabs{:tabs='["Button.vue", "Icon.vue", "Tabs.vue"]' :prefix="ui-files"}
+  ::UiTabs{:tabs='["Button.vue", "Icon.vue", "SvglIcon.vue", "Tabs.vue"]' :prefix="ui-files"}
 
   #ui-files-1
     A versatile button component that can transform into a link when needed. The current variants supported are:
@@ -235,6 +235,27 @@ This folder contains components that define sections in the theme.
     A shortcut to the component provided by the [nuxt-phosphor-icons](https://nuxt-phosphor-icons.vercel.app) library that provides icons throughout your documentation.
 
   #ui-files-3
+    A specialized icon component for rendering SVG icons from the [SVGL](https://svgl.app) registry. Perfect for displaying popular brand logos and icons that aren't available in phosphor-icons.
+
+    **Features:**
+    1. **Remote icon fetching** &mdash; automatically downloads SVG content from the SVGL API
+    2. **Error handling** &mdash; gracefully handles missing icons with console warnings
+    3. **Consistent sizing** &mdash; accepts a size prop to maintain visual consistency
+    4. **Smart fragment rendering** &mdash; uses the `UtilSvgFragment` component for proper SVG display
+
+    **Props:**
+    1. `name` &mdash; the SVGL icon name (e.g., "svgl:react", "svgl:vue") **(Required)**
+    2. `size` &mdash; icon dimensions in pixels (default: 20)
+
+    #### Usage
+    ```vue
+    <UiSvglIcon name="svgl:react" :size="24" />
+    <UiSvglIcon name="svgl:github" />
+    ```
+
+    Icons that start with "svgl:" in `footer.iconLinks` at the `app.config` will automatically use this component instead of phosphor-icons.
+
+  #ui-files-4
     An interactive tabbed interface component that makes organizing content **_effortless_**{.font-cursive}. Perfect for showing code examples, configuration options, or any grouped content.
 
     **Props:**
@@ -271,6 +292,37 @@ This folder contains components that define sections in the theme.
     Code examples...
     ::
     ```
+  ::
+
+<!-- `util/` tab -->
+#tab-5
+  This folder contains utility components that support the functionality of other components.
+
+  <!-- Sub-tabs of util/ -->
+  ::UiTabs{:tabs='["SvgFragment.ts"]' :prefix="util-files"}
+
+  #util-files-1
+    A component that intelligently renders SVG content by parsing SVG strings and converting them to Vue virtual nodes. It's used internally by the `SvglIcon` component but can be handy for custom SVG rendering needs.
+
+    **Features:**
+    1. **SVG parsing** &mdash; converts raw SVG strings into proper Vue components
+    2. **Virtual node traversal** &mdash; recursively processes SVG elements and text nodes
+    3. **Error handling** &mdash; gracefully handles malformed SVG content with warnings
+    4. **Prop inheritance** &mdash; seamlessly passes through width, height, and other SVG attributes
+
+    **Props:**
+    1. `content` &mdash; the raw SVG string to parse and render **(Required)**
+
+    #### Usage
+    ```vue
+    <UtilSvgFragment 
+      content="<svg><circle cx='10' cy='10' r='10' fill='blue' /></svg>" 
+      :width="24" 
+      :height="24" 
+    />
+    ```
+
+    **Note:** This component is primarily used internally by `SvglIcon` but can be useful for rendering dynamic SVG content from APIs or user input.
   ::
 ::
 

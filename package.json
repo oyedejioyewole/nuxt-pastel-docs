@@ -12,6 +12,7 @@
   "devDependencies": {
     "@nuxt/eslint": "latest",
     "@types/randomcolor": "^0.5.9",
+    "@types/svg-parser": "^2.0.6",
     "@unhead/vue": "^2.0.14",
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
@@ -35,6 +36,7 @@
     "@vueuse/nuxt": "13.9.0",
     "nuxt-og-image": "5.1.9",
     "nuxt-phosphor-icons": "2.3.2",
+    "svg-parser": "^2.0.4",
     "tailwind-merge": "^3.3.1"
   }
 }

@@ -38,6 +38,9 @@ importers:
       nuxt-phosphor-icons:
         specifier: 2.3.2
         version: 2.3.2(vue@3.5.21(typescript@5.9.2))
+      svg-parser:
+        specifier: ^2.0.4
+        version: 2.0.4
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -48,6 +51,9 @@ importers:
       '@types/randomcolor':
         specifier: ^0.5.9
         version: 0.5.9
+      '@types/svg-parser':
+        specifier: ^2.0.6
+        version: 2.0.6
       '@unhead/vue':
         specifier: ^2.0.14
         version: 2.0.14(vue@3.5.21(typescript@5.9.2))
@@ -1531,6 +1537,9 @@ packages:
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
+
+  '@types/svg-parser@2.0.6':
+    resolution: {integrity: sha512-xrXwOltwMcLrKy79rv4MoalnD82oYLyXAVeeSyrkvR7XdCH4i7YqLNQWxyZ8KPpawtQShiKOse+pmtLeSLtCfQ==}
 
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
@@ -4758,6 +4767,9 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
+  svg-parser@2.0.4:
+    resolution: {integrity: sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==}
+
   svgo@4.0.0:
     resolution: {integrity: sha512-VvrHQ+9uniE+Mvx3+C9IEe/lWasXCU0nXMY2kZeLrHNICuRiC8uMPyM14UEaMOFA5mhyQqEkB02VoQ16n3DLaw==}
     engines: {node: '>=16'}
@@ -6956,6 +6968,8 @@ snapshots:
   '@types/randomcolor@0.5.9': {}
 
   '@types/resolve@1.20.2': {}
+
+  '@types/svg-parser@2.0.6': {}
 
   '@types/unist@2.0.11': {}
 
@@ -10907,6 +10921,8 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
+
+  svg-parser@2.0.4: {}
 
   svgo@4.0.0:
     dependencies:
