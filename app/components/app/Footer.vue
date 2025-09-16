@@ -18,7 +18,7 @@ const { data } = useAsyncData(async () => {
   >
     <ContentRenderer :value="data.content" class="max-lg:text-center" />
 
-    <div class="flex items-center gap-x-8">
+    <div class="min-lg:gap-x-8 flex items-center gap-x-4">
       <div
         v-for="[iconName, link] of Object.entries(data.iconLinks)"
         :key="iconName"
