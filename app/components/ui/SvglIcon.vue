@@ -9,23 +9,23 @@ const props = withDefaults(
   },
 );
 
-const { data: SvglIcon } = await useAsyncData(async () => {
-  const { data: icon } = await useFetch<string>(
-    `/svg/${props.name.replace("svgl:", "")}.svg`,
-    { baseURL: "https://api.svgl.app" },
-  );
-
-  if (/<!doctype\shtml>/g.test(icon.value ?? "")) {
-    console.warn(`Couldn't find '${props.name}' in SVGL registry`);
-    return null;
-  } else return icon.value;
-});
+const { data: svglIcon, error } = await useFetch<string>(
+  `/svg/${props.name.replace("svgl:", "")}.svg`,
+  {
+    baseURL: "https://api.svgl.app",
+    onResponse({ response }) {
+      if (!response._data || /<!doctype\shtml>/g.test(response._data)) {
+        throw new Error(`Couldn't find '${props.name}' in SVGL registry`);
+      }
+    },
+  },
+);
 </script>
 
 <template>
   <UtilSvgFragment
-    v-if="SvglIcon"
-    :content="SvglIcon"
+    v-if="!error && svglIcon"
+    :content="svglIcon"
     :width="size"
     :height="size"
   />

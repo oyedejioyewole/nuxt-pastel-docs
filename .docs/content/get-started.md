@@ -336,13 +336,13 @@ The layer automatically registers a Nuxt module that creates a CSS template acce
 
 #### Usage
 
-1. **Import the base theme styles** in your own CSS file:
+1. Import the base theme styles in your own CSS file:
 
 ```css [assets/css/main.css]
 @import "#nuxt-pastel-docs";
 ```
 
-2. **Register your CSS in your `nuxt.config.ts`**
+2. Register your CSS in your `nuxt.config.ts`
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
