@@ -19,7 +19,7 @@ const { data: latestRelease } = await useFetch<{
       >
         <AppLogo class="w-8" />
 
-        <span class="min-lg:inline-block max-lg:sr-only">{{
+        <span class="lg:inline-block max-lg:sr-only">{{
           pastelDocs.repo.split("/").at(1) ?? ""
         }}</span>
       </NuxtLink>

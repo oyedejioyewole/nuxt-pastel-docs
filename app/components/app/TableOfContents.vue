@@ -34,14 +34,14 @@ const isTableOfContentsToggled = shallowRef(false);
   <div
     v-if="tableOfContents"
     id="table-of-contents"
-    class="border-primary-900/30 dark:border-primary-100/30 min-lg:py-4 min-lg:space-y-4 min-lg:border-y max-lg:border-dashed"
+    class="border-primary-900/30 dark:border-primary-100/30 lg:py-4 lg:space-y-4 lg:border-y max-lg:border-dashed"
   >
     <h3 class="font-cursive px-4 text-xl font-bold max-lg:hidden">
       On this page:
     </h3>
 
     <button
-      class="min-lg:hidden font-cursive inline-flex w-full items-center justify-between py-4 font-bold"
+      class="lg:hidden font-cursive inline-flex w-full items-center justify-between py-4 font-bold"
       @click="isTableOfContentsToggled = !isTableOfContentsToggled"
     >
       On this page:
@@ -60,7 +60,7 @@ const isTableOfContentsToggled = shallowRef(false);
         block: isTableOfContentsToggled,
         hidden: !isTableOfContentsToggled,
       }"
-      class="min-lg:block max-h-[75vh] space-y-4 overflow-y-auto max-lg:mb-4 max-lg:border-l"
+      class="lg:block max-h-[75vh] space-y-4 overflow-y-auto max-lg:mb-4 max-lg:border-l"
     >
       <li
         v-for="entry of tableOfContents"

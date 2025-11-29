@@ -16,9 +16,6 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/svg+xml", href: "./favicon.svg" }],
     },
   },
-  colorMode: {
-    classSuffix: "",
-  },
   content: {
     build: {
       markdown: {

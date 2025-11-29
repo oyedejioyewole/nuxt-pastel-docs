@@ -10,33 +10,39 @@
     "preview": "nuxt preview .docs"
   },
   "devDependencies": {
-    "@nuxt/eslint": "latest",
+    "@nuxt/eslint": "^1.11.0",
     "@types/randomcolor": "^0.5.9",
     "@types/svg-parser": "^2.0.6",
-    "@unhead/vue": "^2.0.14",
-    "eslint": "^9.35.0",
+    "@unhead/vue": "^2.0.19",
+    "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
-    "nuxt": "^4.1.2",
-    "prettier": "^3.6.2",
-    "prettier-plugin-tailwindcss": "^0.6.14",
+    "nuxt": "^4.2.1",
+    "prettier": "^3.7.2",
+    "prettier-plugin-tailwindcss": "^0.7.1",
     "randomcolor": "^0.6.2",
-    "typescript": "^5.9.2",
-    "unstorage": "^1.17.1",
-    "vue": "latest"
+    "typescript": "^5.9.3",
+    "unstorage": "^1.17.3",
+    "vue": "^3.5.25"
   },
-  "packageManager": "pnpm@10.15.1+sha512.34e538c329b5553014ca8e8f4535997f96180a1d0f614339357449935350d924e22f8614682191264ec33d1462ac21561aff97f6bb18065351c162c7e8f6de67",
   "dependencies": {
     "@bobthered/tailwindcss-palette-generator": "^4.0.0",
     "@formkit/auto-animate": "^0.9.0",
-    "@nuxt/content": "^3.7.0",
-    "@nuxt/fonts": "0.11.4",
-    "@nuxtjs/color-mode": "3.5.2",
-    "@nuxtjs/tailwindcss": "7.0.0-beta.0",
-    "@vueuse/core": "^13.9.0",
-    "@vueuse/nuxt": "13.9.0",
-    "nuxt-og-image": "5.1.9",
+    "@nuxt/content": "^3.8.2",
+    "@nuxt/fonts": "0.12.1",
+    "@nuxtjs/color-mode": "4.0.0",
+    "@nuxtjs/tailwindcss": "7.0.0-beta.1",
+    "@vueuse/core": "^14.1.0",
+    "@vueuse/nuxt": "14.1.0",
+    "better-sqlite3": "^12.5.0",
+    "nuxt-og-image": "5.1.12",
     "nuxt-phosphor-icons": "2.3.2",
     "svg-parser": "^2.0.4",
-    "tailwind-merge": "^3.3.1"
-  }
+    "tailwind-merge": "^3.4.0"
+  },
+  "trustedDependencies": [
+    "@parcel/watcher",
+    "better-sqlite3",
+    "esbuild",
+    "unrs-resolver"
+  ]
 }

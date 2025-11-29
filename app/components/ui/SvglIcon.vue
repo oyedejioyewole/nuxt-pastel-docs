@@ -7,13 +7,12 @@ const { data: svglIcon, error } = await useFetch<string>(
   `/svg/${props.name.replace("svgl:", "")}.svg`,
   {
     baseURL: "https://api.svgl.app",
-    onResponse({ response }) {
-      if (!response._data || /<!doctype\shtml>/g.test(response._data)) {
-        throw new Error(
-          `Couldn't find '${props.name.replace("svgl:", "")}' in SVGL registry`,
-        );
-      }
+    onResponseError() {
+      throw new Error(
+        `Couldn't find '${props.name.replace("svgl:", "")}' in SVGL registry`,
+      );
     },
+    responseType: "text",
   },
 );
 
@@ -22,7 +21,7 @@ if (error.value) console.error(error.value.message);
 
 <template>
   <UtilSvgFragment
-    v-if="!error && svglIcon"
+    v-if="svglIcon"
     :content="svglIcon"
     height="20px"
     width="20px"

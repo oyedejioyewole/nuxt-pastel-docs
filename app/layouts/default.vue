@@ -34,7 +34,7 @@ const themePalette = computed(() => {
       >
         <div class="border-primary-900/30 dark:border-primary-100/30 border-b">
           <AppNavigation
-            class="min-lg:py-8 w-9/10 min-xl:w-8/10 mx-auto flex items-center justify-between py-4"
+            class="lg:py-8 w-9/10 xl:w-8/10 mx-auto flex items-center justify-between py-4"
           />
         </div>
 
@@ -42,9 +42,7 @@ const themePalette = computed(() => {
           class="border-primary-900/30 dark:border-primary-100/30 border-dashed has-[#table-of-contents]:max-lg:border-b"
           data-allow-mismatch="children"
         >
-          <AppTableOfContents
-            class="min-lg:hidden w-9/10 min-xl:w-8/10 mx-auto"
-          />
+          <AppTableOfContents class="lg:hidden w-9/10 xl:w-8/10 mx-auto" />
         </div>
       </div>
 

@@ -10,7 +10,7 @@ useSeoMeta({
 <template>
   <main>
     <AppHeader
-      right-slot-classes="min-lg:h-[400px] h-9/10 grid grid-cols-3 gap-4 rounded-lg"
+      right-slot-classes="lg:h-[400px] h-9/10 grid grid-cols-3 gap-4 rounded-lg"
     >
       <template #aside>
         <AppThemeSwatches />

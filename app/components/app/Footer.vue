@@ -14,11 +14,11 @@ const { data } = useAsyncData(async () => {
 <template>
   <footer
     v-if="data"
-    class="min-lg:py-8 w-9/10 min-xl:w-8/10 @container max-[24.25rem]:justify-center mx-auto flex flex-wrap items-center justify-between gap-4 py-4"
+    class="lg:py-8 w-9/10 xl:w-8/10 @container max-[24.25rem]:justify-center mx-auto flex flex-wrap items-center justify-between gap-4 py-4"
   >
     <ContentRenderer :value="data.content" class="max-lg:text-center" />
 
-    <div class="min-lg:gap-x-8 flex items-center gap-x-4">
+    <div class="lg:gap-x-8 flex items-center gap-x-4">
       <div
         v-for="[iconName, link] of Object.entries(data.iconLinks)"
         :key="iconName"

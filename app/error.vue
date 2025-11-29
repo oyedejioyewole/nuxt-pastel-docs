@@ -12,10 +12,10 @@ const handleError = async () => await clearError({ redirect: "/" });
 <template>
   <NuxtLayout>
     <section
-      class="min-lg:h-[calc(100vh_-_102px)] grid place-items-center max-lg:h-[calc(100vh_-_70px)]"
+      class="lg:h-[calc(100vh-102px)] grid place-items-center max-lg:h-[calc(100vh-70px)]"
     >
       <div class="space-y-4 text-center">
-        <h1 class="min-xl:text-4xl font-serif text-2xl font-bold">
+        <h1 class="xl:text-4xl font-serif text-2xl font-bold">
           Uh oh, a {{ error?.statusCode }}!
         </h1>
         <p class="max-sm:text-sm">
