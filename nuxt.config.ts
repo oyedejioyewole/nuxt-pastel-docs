@@ -19,17 +19,14 @@ export default defineNuxtConfig({
   content: {
     build: {
       markdown: {
-        highlight: {
-          theme: {
-            dark: "github-dark",
-            default: "github-light",
-          },
-        },
         toc: {
           depth: 3,
           searchDepth: 3,
         },
       },
+    },
+    experimental: {
+      sqliteConnector: "native",
     },
   },
   vite: {

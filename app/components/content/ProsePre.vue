@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-4">
     <div
-      class="bg-primary-200 dark:bg-primary-800 max-w-full space-y-4 rounded-lg px-4 py-2"
+      class="bg-primary-900/10 dark:bg-primary-100/10 max-w-full space-y-4 rounded-lg px-4 py-2"
     >
       <p
         class="inline-flex w-full items-center justify-between text-sm font-bold"
