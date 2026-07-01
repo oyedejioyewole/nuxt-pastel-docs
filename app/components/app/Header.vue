@@ -34,18 +34,20 @@ const { pastelDocs } = useAppConfig();
           <li
             v-for="(feature, _index) of pastelDocs.features"
             :key="_index"
-            class="flex gap-x-2"
+            class="flex gap-x-2 items-center text-primary-900 dark:text-primary-100"
           >
-            <UiIcon :name="useRemapIcon('check')" />
+            <UiIcon name="ph:git-commit-duotone" />
             {{ feature }}
           </li>
         </ul>
 
         <div class="@max-md:mb-4 flex flex-wrap gap-4">
-          <UiButton to="/get-started" icon="book-open"> Get started </UiButton>
+          <UiButton to="/get-started" icon="ph:book-open">
+            Get started
+          </UiButton>
 
           <UiButton
-            icon="github-logo"
+            icon="ph:github-logo"
             variant="accent"
             :to="`https://github.com/${pastelDocs.repo}`"
           >

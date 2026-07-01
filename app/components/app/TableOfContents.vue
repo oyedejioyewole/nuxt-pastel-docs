@@ -1,10 +1,62 @@
+<template>
+  <div
+    v-if="tableOfContents"
+    id="table-of-contents"
+    class="border-primary-900/30 dark:border-primary-100/30 lg:py-4 lg:space-y-4 lg:border-y max-lg:border-dashed"
+  >
+    <h3 class="font-cursive px-4 italic font-bold text-lg max-lg:hidden">
+      On this page:
+    </h3>
+
+    <button
+      class="lg:hidden font-cursive inline-flex w-full items-center justify-between py-4 font-bold"
+      @click="isTableOfContentsToggled = !isTableOfContentsToggled"
+    >
+      On this page:
+      <UiIcon
+        :name="{
+          'ph:caret-down': !isTableOfContentsToggled,
+          'ph:caret-up': isTableOfContentsToggled,
+        }"
+      />
+    </button>
+
+    <ul
+      :class="{
+        'lg:block max-h-[75vh] space-y-4 overflow-y-auto max-lg:mb-4 max-lg:border-l': true,
+        block: isTableOfContentsToggled,
+        hidden: !isTableOfContentsToggled,
+      }"
+    >
+      <li
+        v-for="entry of tableOfContents"
+        :key="entry.hash"
+        :class="{
+          'group hover:border-l': true,
+          'pl-8': entry.level === 3,
+          'pl-4': entry.level === 2,
+        }"
+      >
+        <NuxtLink
+          :class="{
+            'transition-all duration-200 group-hover:font-bold': true,
+            'text-sm': entry.level === 3,
+          }"
+          :to="`#${entry.hash}`"
+          >{{ entry.name }}</NuxtLink
+        >
+      </li>
+    </ul>
+  </div>
+</template>
+
 <script lang="ts" setup>
 import type { ContentCollectionItem } from "@nuxt/content";
 
 const route = useRoute();
 
 const content = computed(() =>
-  unref(useNuxtData<ContentCollectionItem>(`page-${route.params.path}`).data),
+  unref(useNuxtData<ContentCollectionItem>(`content:${route.path}`).data),
 );
 
 const tableOfContents = computed(() => {
@@ -29,57 +81,3 @@ const tableOfContents = computed(() => {
 
 const isTableOfContentsToggled = shallowRef(false);
 </script>
-
-<template>
-  <div
-    v-if="tableOfContents"
-    id="table-of-contents"
-    class="border-primary-900/30 dark:border-primary-100/30 lg:py-4 lg:space-y-4 lg:border-y max-lg:border-dashed"
-  >
-    <h3 class="font-cursive px-4 text-xl font-bold max-lg:hidden">
-      On this page:
-    </h3>
-
-    <button
-      class="lg:hidden font-cursive inline-flex w-full items-center justify-between py-4 font-bold"
-      @click="isTableOfContentsToggled = !isTableOfContentsToggled"
-    >
-      On this page:
-      <UiIcon
-        :name="
-          useRemapIcon({
-            'caret-down': !isTableOfContentsToggled,
-            'caret-up': isTableOfContentsToggled,
-          })
-        "
-      />
-    </button>
-
-    <ul
-      :class="{
-        block: isTableOfContentsToggled,
-        hidden: !isTableOfContentsToggled,
-      }"
-      class="lg:block max-h-[75vh] space-y-4 overflow-y-auto max-lg:mb-4 max-lg:border-l"
-    >
-      <li
-        v-for="entry of tableOfContents"
-        :key="entry.hash"
-        :class="{
-          'pl-8': entry.level === 3,
-          'pl-4': entry.level === 2,
-        }"
-        class="group hover:border-l"
-      >
-        <a
-          class="transition-all duration-200 group-hover:font-bold"
-          :class="{
-            'text-sm': entry.level === 3,
-          }"
-          :href="`#${entry.hash}`"
-          >{{ entry.name }}</a
-        >
-      </li>
-    </ul>
-  </div>
-</template>

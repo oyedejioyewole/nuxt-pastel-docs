@@ -4,7 +4,7 @@ node_modules
 nuxt.d.ts
 .output
 .data
-.env
+.env*
 package-lock.json
 framework
 dist
@@ -22,3 +22,9 @@ dist
 
 # JetBrains/WebStorm
 .idea/
+
+# Lighthouse reports
+.unlighthouse/
+
+# Vercel
+.vercel

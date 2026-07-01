@@ -4,7 +4,7 @@ import { tailwindcssPaletteGenerator } from "@bobthered/tailwindcss-palette-gene
 const { pastelDocs } = useAppConfig();
 
 useSeoMeta({
-  titleTemplate: `%s · ${pastelDocs.repo.split("/").at(1)}`,
+  titleTemplate: `%s · ${pastelDocs.projectName ?? pastelDocs.repo.split("/").at(1)}`,
 });
 
 const themePalette = computed(() => {
@@ -32,23 +32,29 @@ const themePalette = computed(() => {
       <div
         class="bg-primary-100/70 dark:bg-primary-900/70 top-0 z-10 backdrop-blur-lg max-lg:sticky"
       >
-        <div class="border-primary-900/30 dark:border-primary-100/30 border-b">
+        <div
+          class="border-current/30 hover:border-current/70 transition duration-300 border-b grid grid-cols-12"
+        >
           <AppNavigation
-            class="lg:py-8 w-9/10 xl:w-8/10 mx-auto flex items-center justify-between py-4"
+            class="lg:py-8 flex items-center justify-between py-4 col-[2/12]"
           />
         </div>
 
         <div
-          class="border-primary-900/30 dark:border-primary-100/30 border-dashed has-[#table-of-contents]:max-lg:border-b"
-          data-allow-mismatch="children"
+          class="border-current/30 border-dashed has-[#table-of-contents]:max-lg:border-b"
         >
-          <AppTableOfContents class="lg:hidden w-9/10 xl:w-8/10 mx-auto" />
+          <AppTableOfContents
+            v-if="$route.name !== 'index'"
+            class="lg:hidden w-9/10 xl:w-8/10 mx-auto"
+          />
         </div>
       </div>
 
       <slot />
 
-      <div class="border-primary-900/30 dark:border-primary-100/30 border-t">
+      <div
+        class="border-current/30 hover:border-current/70 transition duration-300 border-t grid grid-cols-12"
+      >
         <AppFooter />
       </div>
     </Body>

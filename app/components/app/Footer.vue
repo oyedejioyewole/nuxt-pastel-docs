@@ -1,20 +1,7 @@
-<script lang="ts" setup>
-import type { PhosphorIconName } from "#phosphor-icons/types";
-import { parseMarkdown } from "@nuxtjs/mdc/runtime";
-
-const { data } = useAsyncData(async () => {
-  const { pastelDocs } = useAppConfig();
-  return {
-    ...pastelDocs.footer,
-    content: await parseMarkdown(pastelDocs.footer.content),
-  };
-});
-</script>
-
 <template>
   <footer
     v-if="data"
-    class="lg:py-8 w-9/10 xl:w-8/10 @container max-[24.25rem]:justify-center mx-auto flex flex-wrap items-center justify-between gap-4 py-4"
+    class="lg:py-8 @container max-[24.25rem]:justify-center flex flex-wrap items-center justify-between gap-4 py-4 col-[2/12]"
   >
     <ContentRenderer :value="data.content" class="max-lg:text-center" />
 
@@ -28,16 +15,22 @@ const { data } = useAsyncData(async () => {
           :target="link.startsWith('http') ? '_blank' : '_self'"
           class="transition-opacity hover:opacity-70"
         >
-          <UiIcon
-            v-if="!iconName.startsWith('svgl:')"
-            :name="useRemapIcon(iconName as PhosphorIconName)"
-            :size="20"
-            weight="duotone"
-          />
-
-          <UiSvglIcon v-else :name="iconName" />
+          <UiIcon :name="iconName" :size="20" />
         </NuxtLink>
       </div>
     </div>
   </footer>
 </template>
+
+<script lang="ts" setup>
+import { parseMarkdown } from "@nuxtjs/mdc/runtime";
+
+const { pastelDocs } = useAppConfig();
+
+const { data } = useAsyncData("content:footer", async () => {
+  return {
+    ...pastelDocs.footer,
+    content: await parseMarkdown(pastelDocs.footer.content),
+  };
+});
+</script>

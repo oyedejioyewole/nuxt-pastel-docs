@@ -98,15 +98,15 @@ if (
 
 <template>
   <div
-    class="relative flex h-full w-full justify-between p-[60px]"
     :class="[
+      'relative flex h-full w-full justify-between p-15',
       colorMode === 'light'
         ? ['bg-white', 'text-gray-900']
         : ['bg-gray-900', 'text-white'],
     ]"
   >
     <div
-      class="absolute right-[-100%] top-0 flex"
+      class="absolute -right-full top-0 flex"
       :style="{
         width: '200%',
         height: '200%',
@@ -117,7 +117,7 @@ if (
       <div class="flex flex-row items-start justify-between">
         <div class="flex w-full max-w-[65%] flex-col">
           <h1
-            class="m-0 mb-[30px] text-[75px] font-bold"
+            class="m-0 mb-7.5 text-[75px] font-bold"
             style="display: block; text-overflow: ellipsis"
             :style="{ lineClamp: description ? 2 : 3 }"
           >
@@ -125,8 +125,8 @@ if (
           </h1>
           <p
             v-if="description"
-            class="leading-12 text-[35px]"
             :class="[
+              'leading-12 text-[35px]',
               colorMode === 'light' ? ['text-gray-700'] : ['text-gray-300'],
             ]"
             style="display: block; line-clamp: 3; text-overflow: ellipsis"

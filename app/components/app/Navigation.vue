@@ -17,10 +17,16 @@ const { data: latestRelease } = await useFetch<{
         class="font-cursive inline-flex items-center gap-x-2 font-bold transition-opacity hover:opacity-70"
         to="/"
       >
-        <AppLogo class="w-8" />
+        <slot name="icon">
+          <UiIcon
+            :overrides="{ color: 'currentcolor' }"
+            class="size-[1.33em]"
+            name="devicon:nuxt"
+          />
+        </slot>
 
         <span class="lg:inline-block max-lg:sr-only">{{
-          pastelDocs.repo.split("/").at(1) ?? ""
+          pastelDocs.projectName ?? pastelDocs.repo.split("/")[1]
         }}</span>
       </NuxtLink>
 
@@ -45,23 +51,15 @@ const { data: latestRelease } = await useFetch<{
     >
       <ColorScheme>
         <UiIcon
-          :name="
-            useRemapIcon({
-              desktop: $colorMode.preference === 'system',
-              'moon-stars': $colorMode.preference === 'light',
-              sun: $colorMode.preference === 'dark',
-            })
-          "
+          :name="{
+            'ph:moon-stars-duotone': $colorMode.value === 'light',
+            'ph:sun-duotone': $colorMode.value === 'dark',
+          }"
           :size="20"
-          weight="duotone"
         />
 
         <template #placeholder>
-          <UiIcon
-            :name="useRemapIcon('circle-half')"
-            weight="duotone"
-            :size="20"
-          />
+          <UiIcon name="ph:desktop-duotone" :size="20" />
         </template>
       </ColorScheme>
 

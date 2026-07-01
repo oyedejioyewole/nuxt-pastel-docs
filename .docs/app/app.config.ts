@@ -1,11 +1,10 @@
-import type { PhosphorIconName } from "#phosphor-icons/types";
-
 export default defineAppConfig({
   pastelDocs: {
     features: [
       "Sensible defaults.",
-      "Tailwind v4 ready.",
-      "An icon library provided by @phosphor-icons/vue.",
+      "Designed with Tailwind v4.",
+      "Type-safety and editor autocomplete.",
+      "Uses the Iconify API through @nuxt/icon.",
       "Customizable with the use of an app.config.",
       "Extendable through the power of Nuxt layers.",
     ],
@@ -13,8 +12,8 @@ export default defineAppConfig({
       content:
         "Made with :heart: by [oyedejioyewole](https://github.com/oyedejioyewole)",
       iconLinks: {
-        "svgl:nuxt": "https://nuxt.com",
-      } satisfies Partial<Record<PhosphorIconName | `svgl:${string}`, string>>,
+        "devicon:nuxt": "https://nuxt.com",
+      },
     },
     headline: "Create beautiful pastel themed docs with Nuxt.",
     repo: "oyedejioyewole/nuxt-pastel-docs",

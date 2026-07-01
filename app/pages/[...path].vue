@@ -2,17 +2,16 @@
 const route = useRoute();
 
 const { data: content } = await useAsyncData(
-  `page-${route.params.path}`,
+  `content:${route.path}`,
   () => queryCollection("content").path(route.path).first(),
-  { watch: [route] },
+  { watch: [() => route.path] },
 );
 
-if (!content.value) {
+if (!content.value)
   throw createError({
-    statusCode: 404,
-    statusMessage: `Couldn't find page for ${route.path}`,
+    message: `Couldn't find page for ${route.path}`,
+    status: 404,
   });
-}
 
 useSeoMeta({
   title: content.value.title,
@@ -36,11 +35,7 @@ useSeoMeta({
             class="lg:px-4 lg:inline-flex hidden items-center gap-x-2 font-bold underline-offset-4 hover:underline"
             to="/"
           >
-            <UiIcon
-              :name="useRemapIcon('house-line')"
-              :size="20"
-              weight="duotone"
-            />
+            <UiIcon name="ph:house-line-duotone" :size="20" />
             Go home
           </NuxtLink>
 

@@ -1,12 +1,30 @@
-<script lang="ts" setup>
-import type { PhosphorIconName } from "#phosphor-icons/types";
+<template>
+  <div class="flex flex-col items-center gap-y-2">
+    <UiButton
+      :icon="$props.icon"
+      :variant="$props.variant"
+      @click="$props.extra && trollReader"
+    >
+      {{ $props.label }}
+    </UiButton>
 
-const props = withDefaults(
-  defineProps<{
-    extra?: boolean;
-    icon?: PhosphorIconName;
-    variant?: "accent" | "primary";
-  }>(),
+    <div class="font-cursive inline-flex items-start gap-x-2 text-sm font-bold">
+      <UiIcon name="ph:arrow-bend-left-up" />
+      '{{ $props.variant }}' variant
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import type { UiButtonProps } from "../../../../app/components/ui/Button.vue";
+
+withDefaults(
+  defineProps<
+    {
+      label: string;
+      extra?: boolean;
+    } & Pick<UiButtonProps, "icon" | "variant">
+  >(),
   {
     variant: "primary",
   },
@@ -19,22 +37,3 @@ const trollReader = () => {
   );
 };
 </script>
-
-<template>
-  <div class="flex flex-col items-center gap-y-2">
-    <UiButton
-      :icon="$props.icon"
-      :variant="$props.variant"
-      @click="$props.extra ? trollReader() : null"
-    >
-      <slot />
-    </UiButton>
-
-    <div
-      class="font-cursive inline-flex items-center gap-x-2 text-sm font-bold"
-    >
-      <UiIcon :name="useRemapIcon('arrow-bend-left-up')" size="20" />
-      '{{ $props.variant }}' variant
-    </div>
-  </div>
-</template>

@@ -1,13 +1,13 @@
 <template>
-  <h3 class="text-balance pt-4 font-serif text-xl font-bold" :id="props.id">
+  <h3 :id="props.id" class="text-balance pt-4 font-serif text-xl font-bold">
     <a
       v-if="props.id && generate"
-      class="group relative inline-flex items-center decoration-dotted underline-offset-8 hover:underline"
       :href="`#${props.id}`"
+      class="group relative inline-flex items-center decoration-dotted underline-offset-8 hover:underline"
     >
       <UiIcon
-        :name="useRemapIcon('link')"
         class="absolute -left-8 hidden group-hover:block"
+        name="ph:link"
       />
 
       <div>

@@ -12,4 +12,15 @@ export default defineNuxtConfig({
   site: {
     url: "https://nuxt-pastel-docs.vercel.app",
   },
+  vite: {
+    optimizeDeps: {
+      include: [
+        "@bobthered/tailwindcss-palette-generator",
+        "@vue/devtools-core",
+        "@vue/devtools-kit",
+        "randomcolor", // Commonjs library
+        "tailwind-merge",
+      ],
+    },
+  },
 });
