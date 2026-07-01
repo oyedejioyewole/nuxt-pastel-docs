@@ -45,8 +45,8 @@ const { pause, resume } = useIntervalFn(refreshThemeColors, 2000);
 
       <UiIcon
         :name="{
-          'ph:arrow-bend-right-up-bold': themeIndex > 2,
-          'ph:arrow-bend-right-down-bold': !(themeIndex > 2),
+          'ph:arrow-bend-right-up': themeIndex > 2,
+          'ph:arrow-bend-right-down': !(themeIndex > 2),
         }"
       />
     </div>

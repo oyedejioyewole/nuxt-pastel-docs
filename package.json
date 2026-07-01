@@ -13,7 +13,7 @@
     "@iconify-json/devicon": "^1.2.62",
     "@iconify-json/ph": "^1.2.2",
     "@nuxt/eslint": "^1.16.0",
-    "@nuxt/icon": "2.2.5",
+    "@nuxt/icon": "https://pkg.pr.new/nuxt/icon/@nuxt/icon@505",
     "@phosphor-icons/core": "^2.1.1",
     "@types/randomcolor": "^0.5.9",
     "@types/svg-parser": "^2.0.6",
