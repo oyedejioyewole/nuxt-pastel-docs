@@ -1,10 +1,10 @@
 <template>
   <NuxtLayout>
     <section
-      class="lg:h-[calc(100vh-102px)] grid place-items-center max-lg:h-[calc(100vh-70px)]"
+      class="grid place-items-center max-lg:h-[calc(100vh-70px)] lg:h-[calc(100vh-102px)]"
     >
       <div class="space-y-4 text-center">
-        <h1 class="xl:text-4xl font-serif text-2xl font-bold">
+        <h1 class="font-serif text-2xl font-bold xl:text-4xl">
           Uh oh, a {{ error.status }}!
         </h1>
         <p class="max-sm:text-sm">

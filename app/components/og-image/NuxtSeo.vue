@@ -106,7 +106,7 @@ if (
     ]"
   >
     <div
-      class="absolute -right-full top-0 flex"
+      class="absolute top-0 -right-full flex"
       :style="{
         width: '200%',
         height: '200%',
@@ -126,7 +126,7 @@ if (
           <p
             v-if="description"
             :class="[
-              'leading-12 text-[35px]',
+              'text-[35px] leading-12',
               colorMode === 'light' ? ['text-gray-700'] : ['text-gray-300'],
             ]"
             style="display: block; line-clamp: 3; text-overflow: ellipsis"

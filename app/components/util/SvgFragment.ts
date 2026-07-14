@@ -1,4 +1,4 @@
-import { h, defineComponent } from "#imports";
+import { defineComponent, h } from "#imports";
 import { parse as parseSVG, type Node } from "svg-parser";
 
 const traverseNode = (node: Node) => {

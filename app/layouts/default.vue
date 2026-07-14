@@ -4,7 +4,7 @@ import { tailwindcssPaletteGenerator } from "@bobthered/tailwindcss-palette-gene
 const { pastelDocs } = useAppConfig();
 
 useSeoMeta({
-  titleTemplate: `%s · ${pastelDocs.projectName ?? pastelDocs.repo.split("/").at(1)}`,
+  titleTemplate: `%s · ${pastelDocs.projectName ?? pastelDocs.repo.split("/").at(1) ?? "Unnamed"}`,
 });
 
 const themePalette = computed(() => {
@@ -33,7 +33,7 @@ const themePalette = computed(() => {
         class="bg-primary-100/70 dark:bg-primary-900/70 top-0 z-10 backdrop-blur-lg max-lg:sticky"
       >
         <div
-          class="border-current/30 hover:border-current/70 transition duration-300 border-b grid grid-cols-12"
+          class="grid grid-cols-12 border-b border-current/30 transition duration-300 hover:border-current/70"
         >
           <AppNavigation
             class="lg:py-8 flex items-center justify-between py-4 col-[2/12]"
@@ -53,7 +53,7 @@ const themePalette = computed(() => {
       <slot />
 
       <div
-        class="border-current/30 hover:border-current/70 transition duration-300 border-t grid grid-cols-12"
+        class="grid grid-cols-12 border-t border-current/30 transition duration-300 hover:border-current/70"
       >
         <AppFooter />
       </div>

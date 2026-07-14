@@ -11,8 +11,8 @@ export const useIcon = (
         .map(([name, condition]) => [iconMap[name] ?? name, condition])
         .find(([_, condition]) => condition);
 
-      if (!matchedIcon) return null;
-      else return matchedIcon[0] as string;
+      if (matchedIcon) return matchedIcon[0] as string;
+      break;
     }
     case "string":
       return iconMap[icon] ?? icon;

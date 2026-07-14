@@ -1,5 +1,6 @@
+import type { DeepPartial } from "#app/config";
+
 import type { ThemeConfigFull } from "./config";
-import type { DeepPartial } from "./generics";
 
 declare module "@nuxt/schema" {
   // Input, creates deep partial definition in app.config.ts
