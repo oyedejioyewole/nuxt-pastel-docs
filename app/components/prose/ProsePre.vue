@@ -1,14 +1,12 @@
 <template>
-  <div class="space-y-4">
-    <div
-      class="bg-primary-900/10 dark:bg-primary-100/10 max-w-3/4 space-y-4 rounded-lg px-4 py-2"
-    >
+  <div class="space-y-2">
+    <div class="space-y-4 rounded-lg bg-current/10 px-4 py-2">
       <div
         class="inline-flex w-full items-center justify-between text-sm font-bold"
       >
-        <span class="uppercase font-serif">{{ $props.language }}</span>
+        <span class="font-serif uppercase">{{ $props.language }}</span>
 
-        <ul class="inline-flex gap-x-2 items-center">
+        <ul class="inline-flex items-center gap-x-2">
           <li
             v-for="(path, index) in filenameBreadcrumbs"
             :key="path"
@@ -22,10 +20,10 @@
               }"
             />
             <span
-              :class="{
-                'text-xs': true,
-                'font-light': index < filenameBreadcrumbs.length - 1,
-              }"
+              :class="[
+                'text-xs',
+                index < filenameBreadcrumbs.length - 1 && 'font-light',
+              ]"
               >{{ path }}</span
             >
             <UiIcon
@@ -38,13 +36,8 @@
       </div>
 
       <pre
-        :class="{
-          'text-wrap text-sm after:whitespace-pre-line': true,
-          [$props.class]: Boolean($props.class),
-        }"
-      >
-        <slot />
-      </pre>
+        :class="['text-sm text-wrap', Boolean($props.class) && $props.class]"
+      ><slot /></pre>
     </div>
 
     <UiButton
@@ -91,8 +84,12 @@ const filenameBreadcrumbs = computed(
 );
 </script>
 
-<style>
-pre code .line {
-  display: block;
+<style scoped>
+html.light .shiki :deep(span) {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 </style>

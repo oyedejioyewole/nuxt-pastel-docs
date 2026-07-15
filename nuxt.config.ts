@@ -2,15 +2,18 @@ import { fileURLToPath } from "node:url";
 
 export default defineNuxtConfig({
   modules: [
+    "@comark/nuxt",
     "@formkit/auto-animate/nuxt",
     "@nuxt/content",
     "@nuxt/eslint",
     "@nuxt/fonts",
     "@nuxt/icon",
+    "@nuxt/image",
     "@nuxtjs/color-mode",
     "@nuxtjs/tailwindcss",
-    "@vueuse/nuxt",
     // "nuxt-og-image",
+    "@vueuse/nuxt",
+    // "reka-ui/nuxt",
   ],
   devtools: { enabled: true },
   alias: {
@@ -27,14 +30,6 @@ export default defineNuxtConfig({
     },
   },
   content: {
-    build: {
-      markdown: {
-        toc: {
-          depth: 3,
-          searchDepth: 3,
-        },
-      },
-    },
     experimental: {
       sqliteConnector: "native",
     },

@@ -36,16 +36,7 @@ const themePalette = computed(() => {
           class="grid grid-cols-12 border-b border-current/30 transition duration-300 hover:border-current/70"
         >
           <AppNavigation
-            class="lg:py-8 flex items-center justify-between py-4 col-[2/12]"
-          />
-        </div>
-
-        <div
-          class="border-current/30 border-dashed has-[#table-of-contents]:max-lg:border-b"
-        >
-          <AppTableOfContents
-            v-if="$route.name !== 'index'"
-            class="lg:hidden w-9/10 xl:w-8/10 mx-auto"
+            class="col-[2/12] flex items-center justify-between py-4 lg:py-8"
           />
         </div>
       </div>

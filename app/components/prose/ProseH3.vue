@@ -1,9 +1,9 @@
 <template>
-  <h3 :id="props.id" class="text-balance pt-4 font-serif text-xl font-bold">
+  <h3 :id="props.id" class="pt-4 font-serif text-xl font-bold text-balance">
     <a
       v-if="props.id && generate"
       :href="`#${props.id}`"
-      class="group relative inline-flex items-center decoration-dotted underline-offset-8 hover:underline"
+      class="group relative inline-flex items-center"
     >
       <UiIcon
         class="absolute -left-8 hidden group-hover:block"

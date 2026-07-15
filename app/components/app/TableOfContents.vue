@@ -1,15 +1,11 @@
 <template>
-  <div
-    v-if="tableOfContents"
-    id="table-of-contents"
-    class="border-primary-900/30 dark:border-primary-100/30 lg:py-4 lg:space-y-4 lg:border-y max-lg:border-dashed"
-  >
-    <h3 class="font-cursive px-4 italic font-bold text-lg max-lg:hidden">
+  <div>
+    <h3 class="font-cursive px-4 text-lg font-bold max-lg:hidden">
       On this page:
     </h3>
 
     <button
-      class="lg:hidden font-cursive inline-flex w-full items-center justify-between py-4 font-bold"
+      class="font-cursive inline-flex w-full items-center justify-between py-4 font-bold lg:hidden"
       @click="isTableOfContentsToggled = !isTableOfContentsToggled"
     >
       On this page:
@@ -23,61 +19,49 @@
 
     <ul
       :class="{
-        'lg:block max-h-[75vh] space-y-4 overflow-y-auto max-lg:mb-4 max-lg:border-l': true,
+        'max-h-[75vh] space-y-4 overflow-y-auto max-lg:mb-4 max-lg:border-l lg:block': true,
         block: isTableOfContentsToggled,
         hidden: !isTableOfContentsToggled,
       }"
     >
       <li
-        v-for="entry of tableOfContents"
-        :key="entry.hash"
+        v-for="entry of __flattenTableOfContents($props.data.links)"
+        :key="entry.id"
         :class="{
-          'group hover:border-l': true,
-          'pl-8': entry.level === 3,
-          'pl-4': entry.level === 2,
+          'pl-4': entry.depth === 2,
+          'pl-8': entry.depth === 3,
         }"
       >
         <NuxtLink
-          :class="{
-            'transition-all duration-200 group-hover:font-bold': true,
-            'text-sm': entry.level === 3,
-          }"
-          :to="`#${entry.hash}`"
-          >{{ entry.name }}</NuxtLink
-        >
+          :to="`#${entry.id}`"
+          class="group inline-flex items-center gap-x-2 text-sm transition-all duration-200"
+          >{{ entry.text }}
+          <UiIcon
+            class="invisible shrink-0 group-hover:visible"
+            name="ph:link"
+            size="1.33em"
+          />
+        </NuxtLink>
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
-import type { ContentCollectionItem } from "@nuxt/content";
+import type { Toc } from "@nuxt/content";
 
-const route = useRoute();
-
-const content = computed(() =>
-  unref(useNuxtData<ContentCollectionItem>(`content:${route.path}`).data),
-);
-
-const tableOfContents = computed(() => {
-  if (!content.value || !content.value.displayToc) return;
-
-  const entries = content.value.body.toc?.links;
-  if (!entries || entries.length < 1) return;
-
-  return entries.flatMap((link) => [
-    {
-      hash: link.id,
-      name: link.text,
-      level: link.depth,
-    },
-    ...(link.children ?? []).map((child) => ({
-      hash: child.id,
-      name: child.text,
-      level: child.depth,
-    })),
-  ]);
-});
+defineProps<{ data: Toc }>();
 
 const isTableOfContentsToggled = shallowRef(false);
+
+const __flattenTableOfContents = (links: Toc["links"]) => {
+  const flat: Omit<Toc["links"][0], "children">[] = [];
+
+  for (const { children, ...link } of links) {
+    flat.push(link);
+    if (children) flat.push(...__flattenTableOfContents(children));
+  }
+
+  return flat;
+};
 </script>

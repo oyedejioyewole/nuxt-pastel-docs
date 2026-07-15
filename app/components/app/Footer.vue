@@ -1,13 +1,15 @@
 <template>
   <footer
-    v-if="data"
-    class="lg:py-8 @container max-[24.25rem]:justify-center flex flex-wrap items-center justify-between gap-4 py-4 col-[2/12]"
+    class="@container col-[2/12] flex flex-wrap items-center justify-between gap-4 py-4 max-[24.25rem]:justify-center lg:py-8"
   >
-    <ContentRenderer :value="data.content" class="max-lg:text-center" />
+    <AppComark
+      class="max-lg:text-center"
+      :markdown="pastelDocs.footer.content"
+    />
 
-    <div class="lg:gap-x-8 flex items-center gap-x-4">
+    <div class="flex items-center gap-x-4 lg:gap-x-8">
       <div
-        v-for="[iconName, link] of Object.entries(data.iconLinks)"
+        v-for="[iconName, link] of Object.entries(pastelDocs.footer.iconLinks)"
         :key="iconName"
       >
         <NuxtLink
@@ -23,14 +25,5 @@
 </template>
 
 <script lang="ts" setup>
-import { parseMarkdown } from "@nuxtjs/mdc/runtime";
-
 const { pastelDocs } = useAppConfig();
-
-const { data } = useAsyncData("content:footer", async () => {
-  return {
-    ...pastelDocs.footer,
-    content: await parseMarkdown(pastelDocs.footer.content),
-  };
-});
 </script>
