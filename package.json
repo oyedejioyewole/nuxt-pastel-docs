@@ -10,7 +10,7 @@
     "preview": "nuxt preview .docs"
   },
   "devDependencies": {
-    "@comark/nuxt": "0.5.0",
+    "@comark/nuxt": "0.5.1",
     "@iconify-json/devicon": "^1.2.62",
     "@iconify-json/ph": "^1.2.2",
     "@nuxt/eslint": "^1.16.0",
@@ -24,7 +24,7 @@
     "eslint-config-prettier": "^10.1.8",
     "nuxt": "^4.4.8",
     "prettier": "^3.9.5",
-    "prettier-plugin-tailwindcss": "^0.8.0",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "randomcolor": "^0.6.2",
     "typescript": "^6.0.3",
     "unstorage": "^1.17.5",
