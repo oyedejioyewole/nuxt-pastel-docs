@@ -32,10 +32,10 @@ const { pause, resume } = useIntervalFn(refreshThemeColors, 2000);
     @mouseleave="resume"
   >
     <div
-      class="relative inline-flex gap-x-1 font-bold opacity-0 transition group-hover:opacity-100 max-lg:group-focus:opacity-100"
       :class="{
-        'inset-y-[calc(50%_+_20px)] items-start': themeIndex > 2,
-        '-inset-y-[calc(50%_+_20px)] items-end': !(themeIndex > 2),
+        'relative inline-flex gap-x-1 font-bold opacity-0 transition group-hover:opacity-100 max-lg:group-focus:opacity-100': true,
+        'inset-y-[calc(50%+20px)] items-start': themeIndex > 2,
+        '-inset-y-[calc(50%+20px)] items-end': !(themeIndex > 2),
       }"
     >
       <span v-if="_themeColor === pastelDocs.themeColor" class="font-cursive"
@@ -44,13 +44,10 @@ const { pause, resume } = useIntervalFn(refreshThemeColors, 2000);
       {{ _themeColor }}
 
       <UiIcon
-        :name="
-          useRemapIcon({
-            'arrow-bend-right-up': themeIndex > 2,
-            'arrow-bend-right-down': !(themeIndex > 2),
-          })
-        "
-        weight="bold"
+        :name="{
+          'ph:arrow-bend-right-up': themeIndex > 2,
+          'ph:arrow-bend-right-down': !(themeIndex > 2),
+        }"
       />
     </div>
   </button>

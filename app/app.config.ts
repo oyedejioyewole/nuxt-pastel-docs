@@ -3,10 +3,10 @@ export default defineAppConfig({
     features: [],
     footer: {
       content: "Made with :heart: by your-username",
-      iconLinks: {} as Record<string, string>,
+      iconLinks: {},
     },
     headline: "This is the headline",
-    icons: {} as Record<string, string>,
+    iconMap: {},
     repo: "your-username/your-repo",
     themeColor: "#D64045",
   },

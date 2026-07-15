@@ -1,29 +1,63 @@
 <template>
   <div class="space-y-4">
     <div
-      class="bg-primary-900/10 dark:bg-primary-100/10 max-w-full space-y-4 rounded-lg px-4 py-2"
+      class="bg-primary-900/10 dark:bg-primary-100/10 max-w-3/4 space-y-4 rounded-lg px-4 py-2"
     >
-      <p
+      <div
         class="inline-flex w-full items-center justify-between text-sm font-bold"
       >
-        {{ $props.language }}
-        <span class="font-cursive">{{ $props.filename }}</span>
-      </p>
+        <span class="uppercase font-serif">{{ $props.language }}</span>
 
-      <pre class="text-wrap text-sm" :class="$props.class"><slot /></pre>
+        <ul class="inline-flex gap-x-2 items-center">
+          <li
+            v-for="(path, index) in filenameBreadcrumbs"
+            :key="path"
+            class="inline-flex items-center gap-x-1 font-mono"
+          >
+            <UiIcon
+              :name="{
+                'ph:folder-open-duotone':
+                  index < filenameBreadcrumbs.length - 1,
+                'ph:file-text-fill': index === filenameBreadcrumbs.length - 1,
+              }"
+            />
+            <span
+              :class="{
+                'text-xs': true,
+                'font-light': index < filenameBreadcrumbs.length - 1,
+              }"
+              >{{ path }}</span
+            >
+            <UiIcon
+              :name="{
+                'ph:caret-right': index < filenameBreadcrumbs.length - 1,
+              }"
+            />
+          </li>
+        </ul>
+      </div>
+
+      <pre
+        :class="{
+          'text-wrap text-sm after:whitespace-pre-line': true,
+          [$props.class]: Boolean($props.class),
+        }"
+      >
+        <slot />
+      </pre>
     </div>
 
     <UiButton
+      :icon="{ 'ph:check': copied, 'ph:clipboard-duotone': !copied }"
       variant="accent"
-      :icon="{ check: copied, clipboard: !copied }"
-      @click="copy($props.code ?? '')"
+      @click="copy($props.code)"
       >{{ copied ? "Copied" : "Copy" }}
     </UiButton>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   code: {
     type: String,
     default: "",
@@ -51,6 +85,10 @@ defineProps({
 });
 
 const { copied, copy } = useClipboard();
+
+const filenameBreadcrumbs = computed(
+  () => props.filename && props.filename.split("/"),
+);
 </script>
 
 <style>

@@ -1,13 +1,13 @@
 <template>
-  <h4 class="font-serif font-bold" :id="props.id">
+  <h4 :id="props.id" class="font-serif font-bold">
     <a
       v-if="props.id && generate"
-      class="group relative inline-flex items-center decoration-dotted underline-offset-8 hover:underline"
       :href="`#${props.id}`"
+      class="group relative inline-flex items-center decoration-dotted underline-offset-8 hover:underline"
     >
       <UiIcon
-        :name="useRemapIcon('link')"
         class="absolute -left-6 hidden group-hover:block"
+        name="ph:link"
       />
 
       <slot />

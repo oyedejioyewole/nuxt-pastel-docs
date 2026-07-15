@@ -5,7 +5,9 @@
       (props.target ?? props.href.startsWith('https://')) ? '_blank' : ''
     "
   >
-    <ProseCode class="border border-dashed hover:border-solid">
+    <ProseCode
+      class="border border-dashed hover:border-solid font-bold font-cursive"
+    >
       <slot />
     </ProseCode>
   </NuxtLink>

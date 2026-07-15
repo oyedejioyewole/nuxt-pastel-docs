@@ -1,30 +1,30 @@
-<script lang="ts" setup>
-withDefaults(defineProps<{ tabs: string[]; prefix?: string }>(), {
-  prefix: "tab",
-});
-
-const activeTab = shallowRef(1);
-</script>
-
 <template>
   <div class="space-y-4">
     <nav class="flex flex-wrap gap-2">
       <button
         v-for="(tab, index) of $props.tabs"
         :key="tab"
-        type="button"
         @click="activeTab = index + 1"
       >
-        <ProseCode
-          class="border"
+        <div
           :class="{
+            'border inline-flex items-center gap-x-2 bg-primary-900/10 dark:bg-primary-100/10 px-4 rounded-lg py-1': true,
             'border-inherit': index === activeTab - 1,
             'not-hover:border-transparent hover:border-dashed':
               index !== activeTab - 1,
           }"
         >
-          {{ tab }}
-        </ProseCode>
+          <UiIcon
+            :name="{
+              [$props.icon.active as string]: index === activeTab - 1,
+              [$props.icon.default as string]: index !== activeTab - 1,
+            }"
+          />
+
+          <code class="text-xs">
+            {{ tab }}
+          </code>
+        </div>
       </button>
     </nav>
 
@@ -39,3 +39,27 @@ const activeTab = shallowRef(1);
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+import type { UiIconProps } from "./Icon.vue";
+
+withDefaults(
+  defineProps<{
+    tabs: string[];
+    icon?: Partial<{
+      default: UiIconProps["name"];
+      active: UiIconProps["name"];
+    }>;
+    prefix?: string;
+  }>(),
+  {
+    prefix: "tab",
+    icon: () => ({
+      default: "ph:circle-duotone",
+      active: "ph:circle-fill",
+    }),
+  },
+);
+
+const activeTab = shallowRef(1);
+</script>

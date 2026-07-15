@@ -1,13 +1,16 @@
 <script lang="ts" setup>
 const { pastelDocs } = useAppConfig();
 
-defineOgImageComponent("NuxtSeo", {
-  theme: pastelDocs.themeColor,
-});
+/**
+  defineOgImageComponent("NuxtSeo", {
+    theme: pastelDocs.themeColor,
+  });
+ */
 </script>
 
 <template>
   <NuxtRouteAnnouncer />
+
   <NuxtLayout>
     <NuxtLoadingIndicator :color="pastelDocs.themeColor" />
     <NuxtPage />
