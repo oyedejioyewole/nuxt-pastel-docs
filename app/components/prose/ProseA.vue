@@ -6,7 +6,7 @@
     "
   >
     <ProseCode
-      class="border border-dashed hover:border-solid font-bold font-cursive"
+      class="font-cursive border border-dashed font-bold hover:border-solid"
     >
       <slot />
     </ProseCode>

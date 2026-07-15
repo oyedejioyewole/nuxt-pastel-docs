@@ -9,13 +9,15 @@ export default defineNuxtConfig({
       rootDir: fileURLToPath(new URL("..", import.meta.url)),
     },
   },
-  site: {
-    url: "https://nuxt-pastel-docs.vercel.app",
-  },
+  // site: {
+  //   url: "https://nuxt-pastel-docs.vercel.app",
+  // },
   vite: {
     optimizeDeps: {
       include: [
         "@bobthered/tailwindcss-palette-generator",
+        "@shikijs/themes/github-dark",
+        "@shikijs/themes/github-light",
         "@vue/devtools-core",
         "@vue/devtools-kit",
         "randomcolor", // Commonjs library

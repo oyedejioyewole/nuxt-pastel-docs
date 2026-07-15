@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-import { twMerge } from "tailwind-merge";
+import { cn, type ClassValue } from "tailwind-variants";
 
 defineProps<{
-  class?: string;
-  leftSlotClasses?: string;
-  rightSlotClasses?: string;
+  classes?: Partial<{
+    aside: ClassValue;
+    default: ClassValue;
+  }>;
 }>();
 
 const { pastelDocs } = useAppConfig();
@@ -13,16 +14,14 @@ const { pastelDocs } = useAppConfig();
 <template>
   <header
     :class="
-      twMerge(
-        'lg:h-[calc(100vh-102px)] w-9/10 xl:w-8/10 lg:justify-between xl:justify-around lg:grid-cols-2 lg:gap-x-8 mx-auto grid items-center max-lg:min-h-[calc(100vh-70px)] max-lg:grid-rows-2',
-        $props.class,
+      cn(
+        'mx-auto grid h-[calc(100vh-88px)] w-9/10 items-center max-lg:min-h-[calc(100vh-55px)] max-lg:grid-rows-2 lg:grid-cols-2 lg:justify-between lg:gap-x-8 xl:w-8/10 xl:justify-around',
+        $attrs.class,
       )
     "
   >
     <!-- 1st column -->
-    <div
-      :class="twMerge('@container basis-1/2 space-y-4', $props.leftSlotClasses)"
-    >
+    <div :class="cn('@container basis-1/2 space-y-4', $props.classes?.default)">
       <slot>
         <!-- Tagline -->
         <ProseH1>
@@ -32,35 +31,37 @@ const { pastelDocs } = useAppConfig();
         <!-- Feature list -->
         <ul class="space-y-2">
           <li
-            v-for="(feature, _index) of pastelDocs.features"
-            :key="_index"
-            class="flex gap-x-2 items-center text-primary-900 dark:text-primary-100"
+            v-for="(feature, index) of pastelDocs.features"
+            :key="index"
+            class="text-primary-900 dark:text-primary-100 flex items-center gap-x-2"
           >
-            <UiIcon name="ph:git-commit-duotone" />
+            <UiIcon name="ph:asterisk-bold" />
             {{ feature }}
           </li>
         </ul>
 
-        <div class="@max-md:mb-4 flex flex-wrap gap-4">
-          <UiButton to="/get-started" icon="ph:book-open">
-            Get started
-          </UiButton>
+        <slot name="buttons">
+          <div class="flex flex-wrap gap-4 @max-md:mb-4">
+            <UiButton to="/getting-started" icon="ph:book-open">
+              Get started
+            </UiButton>
 
-          <UiButton
-            icon="ph:github-logo"
-            variant="accent"
-            :to="`https://github.com/${pastelDocs.repo}`"
-          >
-            View project
-          </UiButton>
-        </div>
+            <UiButton
+              icon="ph:github-logo"
+              variant="accent"
+              :to="`https://github.com/${pastelDocs.repo}`"
+            >
+              View project
+            </UiButton>
+          </div>
+        </slot>
       </slot>
     </div>
 
     <!-- 2nd column -->
     <div
       v-if="$slots['aside']"
-      :class="twMerge('max-lg:order-first', $props.rightSlotClasses)"
+      :class="cn('max-lg:order-first', $props.classes?.aside)"
     >
       <slot name="aside" />
     </div>

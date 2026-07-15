@@ -8,7 +8,7 @@
       >
         <div
           :class="{
-            'border inline-flex items-center gap-x-2 bg-primary-900/10 dark:bg-primary-100/10 px-4 rounded-lg py-1': true,
+            'bg-primary-900/10 dark:bg-primary-100/10 inline-flex items-center gap-x-2 rounded-lg border px-4 py-1': true,
             'border-inherit': index === activeTab - 1,
             'not-hover:border-transparent hover:border-dashed':
               index !== activeTab - 1,
@@ -30,18 +30,18 @@
 
     <div
       v-for="index in $props.tabs.length"
-      :id="`${$props.prefix}-${index}`"
-      :key="`${$props.prefix}-${index}`"
+      :id="$props.prefix + '-' + index"
+      :key="$props.prefix + '-' + index"
       v-auto-animate
       class="space-y-4"
     >
-      <slot v-if="index === activeTab" :name="`${$props.prefix}-${index}`" />
+      <slot v-if="index === activeTab" :name="$props.prefix + '-' + index" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import type { UiIconProps } from "./Icon.vue";
+import type { UiIconProps } from "../ui/Icon.vue";
 
 withDefaults(
   defineProps<{
@@ -55,8 +55,8 @@ withDefaults(
   {
     prefix: "tab",
     icon: () => ({
-      default: "ph:circle-duotone",
-      active: "ph:circle-fill",
+      default: "ph:folder-duotone",
+      active: "ph:folder-open-fill",
     }),
   },
 );

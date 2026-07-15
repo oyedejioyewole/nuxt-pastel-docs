@@ -3,7 +3,7 @@
     <a
       v-if="props.id && generate"
       :href="`#${props.id}`"
-      class="group relative inline-flex items-end decoration-dotted underline-offset-8 hover:underline"
+      class="group relative inline-flex items-center"
     >
       <UiIcon
         class="absolute -left-10 hidden group-hover:block"
