@@ -42,6 +42,7 @@
     "media-query-parser": "^3.0.2",
     "nuxt-og-image": "6.7.2",
     "svg-parser": "^2.0.4",
+    "tailwind-merge": "^3.6.0",
     "tailwind-variants": "^3.2.2"
   },
   "trustedDependencies": [
