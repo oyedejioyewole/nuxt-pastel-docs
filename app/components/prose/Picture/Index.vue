@@ -1,5 +1,5 @@
 <template>
-  <picture :key="hasColorScheme ? $colorMode.value : undefined">
+  <picture>
     <ClientOnly v-if="hasColorScheme">
       <PictureSources :alt="$props.alt" :sources="filteredSources" />
 
@@ -63,14 +63,17 @@ const sources = computed(() => {
 const isMounted = useMounted();
 const isSystemThemeDark = usePreferredDark();
 
-const filteredSources = computedAsync(async () => {
-  if (!isMounted.value) return [];
+const filteredSources = ref<PictureSources[]>([]);
 
-  const { isParserError, parseMediaQuery, stringify } =
-    await import("media-query-parser");
+watch(
+  [() => $colorMode.value, isMounted, sources, isSystemThemeDark],
+  async ([currentColorMode, isMounted, sources, isSystemThemeDark]) => {
+    if (!isMounted) return;
 
-  return (
-    sources.value
+    const { isParserError, parseMediaQuery, stringify } =
+      await import("media-query-parser");
+
+    filteredSources.value = sources
       // Convert query string into its AST representation for easier manipulation.
       .map(([query, source]) => {
         const queryResponse = parseMediaQuery(query);
@@ -89,7 +92,7 @@ const filteredSources = computedAsync(async () => {
         scheme: findMediaQueryFeature(entry.query.tree, "prefers-color-scheme"),
       }))
       // Filter out any entries that have a "prefers-color-scheme" media query that does not match the `$colorMode.value`.
-      .filter(({ scheme }) => !scheme || scheme === $colorMode.value)
+      .filter(({ scheme }) => !scheme || scheme === currentColorMode)
       // Traverse the AST to find and replace all "prefers-color-scheme" media queries with the current system theme,
       // and return a new array containing the updated media query string and the corresponding image source.
       .map(({ query, scheme, source }): [string, ImageSizes] => {
@@ -98,11 +101,12 @@ const filteredSources = computedAsync(async () => {
         const queryResponse = findAndReplaceMediaQueryFeature(
           structuredClone(query.tree),
           "prefers-color-scheme",
-          isSystemThemeDark.value ? "dark" : "light",
+          isSystemThemeDark ? "dark" : "light",
         );
 
         return [stringify(queryResponse.tree), source];
-      })
-  );
-}, []);
+      });
+  },
+  { immediate: true },
+);
 </script>
