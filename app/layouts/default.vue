@@ -30,7 +30,7 @@ const themePalette = computed(() => {
       class="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 selection:bg-primary-900/20 dark:selection:bg-primary-100/20"
     >
       <div
-        class="bg-primary-100/70 dark:bg-primary-900/70 top-0 z-10 backdrop-blur-lg max-lg:sticky"
+        class="max-lg:bg-primary-100/70 max-lg:dark:bg-primary-900/70 inset-0 z-10 backdrop-blur-lg max-lg:sticky"
       >
         <div
           class="grid grid-cols-12 border-b border-current/30 transition duration-300 hover:border-current/70"

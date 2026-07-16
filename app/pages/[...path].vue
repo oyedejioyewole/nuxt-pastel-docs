@@ -8,7 +8,7 @@
     />
 
     <aside
-      class="relative border-current/30 max-lg:order-first max-lg:col-span-full max-lg:grid max-lg:grid-cols-12 max-lg:border-dashed has-[#table-of-contents]:max-lg:border-b lg:col-[10/12] lg:border-l"
+      class="max-lg:dark:bg-primary-900/70 max-lg:bg-primary-100/70 relative border-current/30 max-lg:sticky max-lg:inset-y-13 max-lg:order-first max-lg:col-span-full max-lg:grid max-lg:grid-cols-12 max-lg:border-dashed max-lg:backdrop-blur-lg has-[#table-of-contents]:max-lg:border-b lg:col-[10/12] lg:border-l"
     >
       <div class="sticky inset-0 space-y-4 max-lg:col-[2/12] lg:translate-y-8">
         <NuxtLink
@@ -22,7 +22,7 @@
         <LazyAppTableOfContents
           v-if="$route.name !== 'index'"
           id="table-of-contents"
-          :data="content!.body.toc!"
+          :table="content!.comark.meta.toc"
           class="border-current/30 lg:space-y-4 lg:border-y lg:py-4"
         />
       </div>
@@ -33,12 +33,25 @@
 <script lang="ts" setup>
 import { LazyGetStartedButton } from "#components";
 
+import { parse } from "@comark/nuxt/parse";
+import toc from "@comark/nuxt/plugins/toc";
+
 const $route = useRoute();
 
 const { data: content } = await useAsyncData(
   `content:${$route.path}`,
-  () => queryCollection("content").path($route.path).first(),
-  { watch: [() => $route.path] },
+  async () => {
+    const queryResponse = await queryCollection("content")
+      .path($route.path)
+      .first();
+    if (!queryResponse) return null;
+
+    return {
+      ...queryResponse,
+      comark: await parse(queryResponse.rawbody, { plugins: [toc()] }),
+    };
+  },
+  { watch: [() => $route.path], pick: ["comark", "seo", "rawbody"] },
 );
 
 if (!content.value)
@@ -48,7 +61,7 @@ if (!content.value)
   });
 
 useSeoMeta({
-  title: content.value.title,
-  description: content.value.description,
+  title: content.value.seo.title,
+  description: content.value.seo.description,
 });
 </script>

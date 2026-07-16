@@ -10,22 +10,20 @@
     >
       On this page:
       <UiIcon
-        :name="{
-          'ph:caret-down': !isTableOfContentsToggled,
-          'ph:caret-up': isTableOfContentsToggled,
-        }"
+        :class="[
+          'transition duration-300',
+          isTableOfContentsToggled && 'rotate-90',
+        ]"
+        name="ph:caret-down"
       />
     </button>
 
     <ul
-      :class="{
-        'max-h-[75vh] space-y-4 overflow-y-auto max-lg:mb-4 max-lg:border-l lg:block': true,
-        block: isTableOfContentsToggled,
-        hidden: !isTableOfContentsToggled,
-      }"
+      v-show="isTableOfContentsToggled"
+      class="max-h-[75vh] space-y-4 overflow-y-auto max-lg:mb-4 max-lg:border-l lg:block!"
     >
       <li
-        v-for="entry of __flattenTableOfContents($props.data.links)"
+        v-for="entry of __flattenTableOfContents($props.table.links)"
         :key="entry.id"
         :class="{
           'pl-4': entry.depth === 2,
@@ -34,12 +32,12 @@
       >
         <NuxtLink
           :to="`#${entry.id}`"
-          class="group inline-flex items-center gap-x-2 text-sm transition-all duration-200"
+          class="group inline-flex items-center gap-x-2 text-sm"
+          @click="isTableOfContentsToggled = false"
           >{{ entry.text }}
           <UiIcon
             class="invisible shrink-0 group-hover:visible"
-            name="ph:link"
-            size="1.33em"
+            name="ph:caret-left"
           />
         </NuxtLink>
       </li>
@@ -50,7 +48,7 @@
 <script lang="ts" setup>
 import type { Toc } from "@nuxt/content";
 
-defineProps<{ data: Toc }>();
+defineProps<{ table: Toc }>();
 
 const isTableOfContentsToggled = shallowRef(false);
 

@@ -10,8 +10,8 @@
           <slot name="logo">
             <UiIcon
               :overrides="{ color: 'currentcolor' }"
-              size="1.33em"
               name="devicon:nuxt"
+              size="1.33em"
             />
           </slot>
 
@@ -47,11 +47,11 @@
               'ph:moon-stars-duotone': $colorMode.value === 'light',
               'ph:sun-duotone': $colorMode.value === 'dark',
             }"
-            size="1.33em"
+            class="lg:size-[1.33em]"
           />
 
           <template #placeholder>
-            <UiIcon name="ph:desktop-duotone" size="1.33em" />
+            <UiIcon name="ph:desktop-duotone" class="lg:size-[1.33em]" />
           </template>
         </ColorScheme>
 
