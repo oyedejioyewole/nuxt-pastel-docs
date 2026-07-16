@@ -8,7 +8,7 @@
     />
 
     <aside
-      class="max-lg:dark:bg-primary-900/70 max-lg:bg-primary-100/70 relative border-current/30 max-lg:sticky max-lg:inset-y-13 max-lg:order-first max-lg:col-span-full max-lg:grid max-lg:grid-cols-12 max-lg:border-dashed max-lg:backdrop-blur-lg has-[#table-of-contents]:max-lg:border-b lg:col-[10/12] lg:border-l"
+      class="max-lg:dark:bg-primary-900/70 max-lg:bg-primary-100/70 relative border-current/30 max-lg:sticky max-lg:inset-y-13.5 max-lg:z-10 max-lg:order-first max-lg:col-span-full max-lg:grid max-lg:grid-cols-12 max-lg:border-dashed max-lg:backdrop-blur-lg has-[#table-of-contents]:max-lg:border-b lg:col-[10/12] lg:border-l"
     >
       <div class="sticky inset-0 space-y-4 max-lg:col-[2/12] lg:translate-y-8">
         <NuxtLink
