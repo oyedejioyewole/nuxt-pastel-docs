@@ -1,7 +1,7 @@
 <template>
   <template
     v-for="([mediaQuery, source], index) of $props.sources"
-    :key="$colorMode.value + ':' + source.src"
+    :key="source.src"
   >
     <source :media="mediaQuery" :sizes="source.sizes" :srcset="source.srcset" />
 
@@ -20,6 +20,4 @@ import { imgClass } from "./Index.vue";
 import type { PictureSources, ProsePictureProps } from "./Index.vue";
 
 defineProps<{ sources: PictureSources[] } & Omit<ProsePictureProps, "media">>();
-
-const $colorMode = useColorMode();
 </script>

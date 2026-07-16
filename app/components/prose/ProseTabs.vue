@@ -29,13 +29,11 @@
     </nav>
 
     <div
-      v-for="index in $props.tabs.length"
-      :id="$props.prefix + '-' + index"
-      :key="$props.prefix + '-' + index"
-      v-auto-animate
+      :id="$props.prefix + '-' + activeTab"
+      :key="$props.prefix + '-' + activeTab"
       class="space-y-4"
     >
-      <slot v-if="index === activeTab" :name="$props.prefix + '-' + index" />
+      <slot :name="$props.prefix + '-' + activeTab" />
     </div>
   </div>
 </template>

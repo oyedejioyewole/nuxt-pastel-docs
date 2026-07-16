@@ -1,6 +1,6 @@
 <template>
-  <picture>
-    <ClientOnly v-if="delayRendering">
+  <picture :key="hasColorScheme ? $colorMode.value : undefined">
+    <ClientOnly v-if="hasColorScheme">
       <PictureSources :alt="$props.alt" :sources="filteredSources" />
 
       <template #fallback>
@@ -46,7 +46,7 @@ const { media, ...props } = defineProps<ProsePictureProps>();
 
 const $colorMode = useColorMode();
 
-const delayRendering = computed(() => {
+const hasColorScheme = computed(() => {
   return Object.keys(media).some((query) =>
     query.includes("prefers-color-scheme"),
   );
