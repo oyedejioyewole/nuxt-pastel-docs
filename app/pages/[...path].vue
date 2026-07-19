@@ -1,10 +1,9 @@
 <template>
   <main class="grid min-h-screen grid-cols-12">
-    <AppComark
+    <ComarkRenderer
       :components="{ button: LazyGetStartedButton }"
-      :markdown="content!.rawbody"
+      :tree="content!.comark"
       class="col-[2/12] space-y-4 py-8 text-pretty lg:col-[2/9]"
-      highlight
     />
 
     <aside
@@ -32,9 +31,7 @@
 
 <script lang="ts" setup>
 import { LazyGetStartedButton } from "#components";
-
-import { parse } from "@comark/nuxt/parse";
-import toc from "@comark/nuxt/plugins/toc";
+import { parseMarkdown } from "../utils/comark";
 
 const $route = useRoute();
 
@@ -43,15 +40,18 @@ const { data: content } = await useAsyncData(
   async () => {
     const queryResponse = await queryCollection("content")
       .path($route.path)
+      .select("rawbody", "seo")
       .first();
     if (!queryResponse) return null;
 
     return {
       ...queryResponse,
-      comark: await parse(queryResponse.rawbody, { plugins: [toc()] }),
+      comark: await parseMarkdown(queryResponse.rawbody, {
+        tableOfContents: true,
+        highlight: true,
+      }),
     };
   },
-  { watch: [() => $route.path], pick: ["comark", "seo", "rawbody"] },
 );
 
 if (!content.value)

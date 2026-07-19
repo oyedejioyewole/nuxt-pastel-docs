@@ -8,6 +8,7 @@
     <img
       v-if="index === $props.sources.length - 1"
       v-bind="source"
+      decoding="async"
       :alt="$props.alt"
       :class="imgClass"
     />

@@ -63,50 +63,28 @@ const sources = computed(() => {
 const isMounted = useMounted();
 const isSystemThemeDark = usePreferredDark();
 
-const filteredSources = ref<PictureSources[]>([]);
+const filteredSources = computed((): PictureSources[] => {
+  if (!isMounted.value) return sources.value;
 
-watch(
-  [() => $colorMode.value, isMounted, sources, isSystemThemeDark],
-  async ([currentColorMode, isMounted, sources, isSystemThemeDark]) => {
-    if (!isMounted) return;
+  const FEATURE_RE = /\((prefers-color-scheme:\s*)(\w+)\)/;
+  return sources.value
+    .filter(([query]) => {
+      const match = query.match(FEATURE_RE);
 
-    const { isParserError, parseMediaQuery, stringify } =
-      await import("media-query-parser");
+      return !match || match[2] === $colorMode.value;
+    })
+    .map(([query, source]) => {
+      const match = query.match(FEATURE_RE);
 
-    filteredSources.value = sources
-      // Convert query string into its AST representation for easier manipulation.
-      .map(([query, source]) => {
-        const queryResponse = parseMediaQuery(query);
-        if (isParserError(queryResponse)) {
-          console.error(`Failed to parse media query: ${query}`);
-          return null;
-        }
-
-        return { query: { value: query, tree: queryResponse }, source };
-      })
-      // Filter out any entries that failed to parse.
-      .filter((entry): entry is NonNullable<typeof entry> => entry !== null)
-      // Traverse the AST to find any "prefers-color-scheme" media queries and define a new property, `scheme` for each entry.
-      .map((entry) => ({
-        ...entry,
-        scheme: findMediaQueryFeature(entry.query.tree, "prefers-color-scheme"),
-      }))
-      // Filter out any entries that have a "prefers-color-scheme" media query that does not match the `$colorMode.value`.
-      .filter(({ scheme }) => !scheme || scheme === currentColorMode)
-      // Traverse the AST to find and replace all "prefers-color-scheme" media queries with the current system theme,
-      // and return a new array containing the updated media query string and the corresponding image source.
-      .map(({ query, scheme, source }): [string, ImageSizes] => {
-        if (!scheme) return [stringify(query.tree), source]; // No existing scheme, return as is
-
-        const queryResponse = findAndReplaceMediaQueryFeature(
-          structuredClone(query.tree),
-          "prefers-color-scheme",
-          isSystemThemeDark ? "dark" : "light",
-        );
-
-        return [stringify(queryResponse.tree), source];
-      });
-  },
-  { immediate: true },
-);
+      return [
+        !match
+          ? query
+          : query.replace(
+              FEATURE_RE,
+              `($1${isSystemThemeDark.value ? "dark" : "light"})`,
+            ),
+        source,
+      ];
+    });
+});
 </script>

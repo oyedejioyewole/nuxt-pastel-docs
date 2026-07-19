@@ -3,7 +3,6 @@ import { fileURLToPath } from "node:url";
 export default defineNuxtConfig({
   modules: [
     "@comark/nuxt",
-    "@formkit/auto-animate/nuxt",
     "@nuxt/content",
     "@nuxt/eslint",
     "@nuxt/fonts",
@@ -13,7 +12,6 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     // "nuxt-og-image",
     "@vueuse/nuxt",
-    // "reka-ui/nuxt",
   ],
   devtools: { enabled: true },
   alias: {

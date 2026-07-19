@@ -2,7 +2,7 @@
   <footer
     class="@container col-[2/12] flex flex-wrap items-center justify-between gap-4 py-4 max-[24.25rem]:justify-center lg:py-8"
   >
-    <AppComark
+    <UtilComarkRenderer
       class="max-lg:text-center"
       :markdown="pastelDocs.footer.content"
     />
